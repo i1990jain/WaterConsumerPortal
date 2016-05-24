@@ -10,7 +10,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public ModelAndView homePage() {
 		System.out.println("yo");
-		String message = "<br><div style='text-align:center;'>" + "<h3> Water Consumer Portal</h3></div><br><br>";
+		String message = "Water Consumer Portal";
 		return new ModelAndView("welcome", "message", message);
 	}
 }
