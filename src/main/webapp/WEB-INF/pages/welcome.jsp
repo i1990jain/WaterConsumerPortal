@@ -20,10 +20,11 @@
     </head>
   <body>
   
-    	 
+    	 <h1 align="center">${message}</h1>
 				<div class="loginmodal-container">
-					<h1>${message}</h1><br>
-				  <form>
+					
+				  <form class="form-signin">
+				  <h3 class="form-signin-heading" align="center">Sign In</h3>
 					<input type="text" name="user" placeholder="Username">
 					<input type="password" name="pass" placeholder="Password">
 					<input type="submit" name="login" class="login loginmodal-submit" value="Login">
