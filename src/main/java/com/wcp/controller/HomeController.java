@@ -7,11 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-	@RequestMapping("/welcome")
+	@RequestMapping("/")
 	public ModelAndView homePage() {
-
-		String message = "<br><div style='text-align:center;'>"
-				+ "<h3>********** Water Consumer Portal</h3></div><br><br>";
+		System.out.println("yo");
+		String message = "<br><div style='text-align:center;'>" + "<h3> Water Consumer Portal</h3></div><br><br>";
 		return new ModelAndView("welcome", "message", message);
 	}
 }
