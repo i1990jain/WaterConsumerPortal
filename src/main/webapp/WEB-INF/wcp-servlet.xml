@@ -8,9 +8,10 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context.xsd">
- 
+ 	<!-- package definition -->
 	<context:component-scan base-package="com.wcp.controller" />
- 
+ 	
+ 	<!-- View Resolver bean for loading pages -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
@@ -19,9 +20,13 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	<!-- Declaring configuration as default servlet handler -->
 	<mvc:default-servlet-handler/>
+	
+	<!-- Hiding a url extensions -->
 	<mvc:annotation-driven />
 	
+	<!-- Resource folder declaration -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
  
 </beans>

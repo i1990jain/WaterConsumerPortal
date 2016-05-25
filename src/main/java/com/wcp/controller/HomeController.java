@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
+	// Loading the main Page
 	@RequestMapping("/")
 	public ModelAndView homePage() {
 		System.out.println("yo");
