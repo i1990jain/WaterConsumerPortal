@@ -8,15 +8,15 @@ app.config(function ($routeProvider, $httpProvider) {
     $routeProvider
             .when('/',
             		{controller: 'LoginController',
-    					templateUrl: 'login.jsp',
+    					templateUrl: 'login.html',
 						publicAccess: true})
             .when('/login',
                     {controller: 'LoginController',
-            			templateUrl: 'login.jsp',
+            			templateUrl: 'login.html',
                         publicAccess: true})
             .when('/home',
                     {controller: 'LoginController',
-                        templateUrl: 'home.jsp'});
+                        templateUrl: 'home.html'});
 
 
     //configure $http to catch message responses and show them

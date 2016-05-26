@@ -1,4 +1,5 @@
 com\wcp\model\User.class
+com\wcp\service\HibernateUtil.class
 com\wcp\model\Building.class
 com\wcp\model\ConsumerSegment.class
 com\wcp\model\District.class
@@ -13,3 +14,4 @@ com\wcp\controller\AppController.class
 com\wcp\controller\LoginController.class
 com\wcp\model\NeutralUser.class
 com\wcp\model\SmartMeter.class
+com\wcp\service\LoginService.class

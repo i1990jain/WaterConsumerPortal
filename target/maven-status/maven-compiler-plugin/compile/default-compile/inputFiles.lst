@@ -11,5 +11,7 @@ C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\model\DeviceType.
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\model\Module.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\controller\AppController.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\model\MeterReading.java
+C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\service\HibernateUtil.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\model\User.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\model\NeutralUser.java
+C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\service\LoginService.java

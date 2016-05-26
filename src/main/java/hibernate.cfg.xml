@@ -9,5 +9,22 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/smartmeter</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+ 		<property name="show_sql">true</property>
+ 		
+ 		<mapping class="com.wcp.model.Building"/>
+ 		<mapping class="com.wcp.model.ComplexDeviceInstance"/>
+ 		<mapping class="com.wcp.model.ConsumerSegment"/>
+ 		<mapping class="com.wcp.model.DeviceConsumption"/>
+ 		<mapping class="com.wcp.model.DeviceType"/>
+ 		<mapping class="com.wcp.model.District"/>
+ 		<mapping class="com.wcp.model.Household"/>
+ 		<mapping class="com.wcp.model.MeterReading"/>
+ 		<mapping class="com.wcp.model.Module"/>
+ 		<mapping class="com.wcp.model.NeutralUser"/>
+ 		<mapping class="com.wcp.model.SimpleDeviceInstance"/>
+ 		<mapping class="com.wcp.model.SmartMeter"/>
+ 		<mapping class="com.wcp.model.User"/>
+ 		
+ 		
     </session-factory>
 </hibernate-configuration>

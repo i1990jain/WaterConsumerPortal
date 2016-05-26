@@ -23,7 +23,7 @@ app.controller('LoginController', [ '$scope','$window', '$resource', 	function($
 			  var status = response.status;
 			if(data.result==="success"){
 			*/	
-				 $window.location.href = 'home/';
+				// $window.location.href = 'home/';
 			/*}*/
 		});
 	};
