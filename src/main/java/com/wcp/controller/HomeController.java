@@ -7,11 +7,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-	// Loading the main Page
+	// Loading the home Page
 	@RequestMapping("/")
 	public ModelAndView homePage() {
 		System.out.println("yo");
 		String message = "Water Consumer Portal";
 		return new ModelAndView("welcome", "message", message);
 	}
+
+	/*
+	 * @RequestMapping(method = RequestMethod.GET) public String getIndexPage()
+	 * { return "welcome"; }
+	 */
+
 }

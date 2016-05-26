@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -19,39 +20,40 @@
 
 </head>
 <body ng-app="wcp" class="ng-cloak">
-	<div class="generic-container" ng-controller="UserController as ctrl">
+	<div class="generic-container" ng-controller="LoginController">
 		<h1 align="center">${message}</h1>
 		<div class="loginmodal-container">
 
-			<form class="form-signin">
+			<form class="form-signin" ng-submit="login()" name="loginForm">
 				<h3 class="form-signin-heading" align="center">Sign In</h3>
-				<input type="text" name="user" placeholder="Username"> <input
-					type="password" name="pass" placeholder="Password"> <input
-					type="submit" name="login" class="login loginmodal-submit"
-					value="Login">
+				
+				<input type="text" ng-model="username" id="uname" class="username form-control input-sm" name="user" placeholder="Username"> 
+				<input type="password" ng-model="password" id="password" name="pass" placeholder="Password">
+				 <input type="submit" name="login" class="login loginmodal-submit" value="Login">
 			</form>
 
 			<div class="login-help">
-				<a href="#">Register</a> - <a href="#">Forgot Password</a>
+				<a href="#">Register</a>
 			</div>
 		</div>
 	</div>
 
+	<!-- Scripts always at the end of body-->
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="resources/js/jars/bootstrap.min.js"></script>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
-	<script src="<c:url value='/resources/js/app.js' />"></script>
+
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
+    <script src="<c:url value='/resources/js/app.js' />"></script>
 	<script src="<c:url value='/resources/js/service/user_service.js' />"></script>
 	<script
 		src="<c:url value='/resources/js/controller/user_controller.js' />"></script>
-
+	
 </body>
 </html>
