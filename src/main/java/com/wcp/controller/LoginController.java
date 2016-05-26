@@ -1,10 +1,12 @@
 package com.wcp.controller;
 
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.wcp.model.User;
 
@@ -12,9 +14,10 @@ import com.wcp.model.User;
 public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView loginAction(@RequestBody User jsonString) {
-		System.out.println("login yayy");
+	@Produces({ MediaType.APPLICATION_JSON })
+	public String loginAction(@RequestBody User jsonString) {
+		System.out.println("login yayy" + jsonString.getUsername());
 		String message = jsonString.getUsername() + "Welcome";
-		return new ModelAndView("home", "message", message);
+		return "home";
 	}
 }

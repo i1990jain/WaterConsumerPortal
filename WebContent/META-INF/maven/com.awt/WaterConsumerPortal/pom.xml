@@ -86,6 +86,14 @@
 			<version>1.0.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>3.1.6</version>
+		</dependency>
+
+
+
 		<!-- JSON jackson -->
 
 		<dependency>
