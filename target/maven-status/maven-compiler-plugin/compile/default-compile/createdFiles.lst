@@ -9,7 +9,7 @@ com\wcp\model\Module.class
 com\wcp\model\DeviceType.class
 com\wcp\model\Household.class
 com\wcp\model\DeviceConsumption.class
+com\wcp\controller\AppController.class
 com\wcp\controller\LoginController.class
 com\wcp\model\NeutralUser.class
-com\wcp\controller\HomeController.class
 com\wcp\model\SmartMeter.class

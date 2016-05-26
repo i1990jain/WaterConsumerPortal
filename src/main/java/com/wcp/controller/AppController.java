@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class HomeController {
+public class AppController {
 
 	// Loading the home Page
+
 	@RequestMapping("/")
 	public ModelAndView homePage() {
 		System.out.println("yo");
@@ -17,7 +18,7 @@ public class HomeController {
 
 	/*
 	 * @RequestMapping(method = RequestMethod.GET) public String getIndexPage()
-	 * { return "welcome"; }
+	 * { return "/login"; }
 	 */
 
 }

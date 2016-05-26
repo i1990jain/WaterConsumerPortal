@@ -20,18 +20,11 @@
     <![endif]-->
 
 </head>
-<body ng-app="app" class="ng-cloak">
+<body ng-app="wcp" class="ng-cloak">
 	<div class="generic-container">
-		<h1>Hi {{vm.user.firstName}}!</h1>
+		<h1>Hi!</h1>
 		<p>You're logged in!!</p>
-		<h3>All registered users:</h3>
-		<ul>
-			<li ng-repeat="user in vm.allUsers">{{user.username}}
-				({{user.firstName}} {{user.lastName}}) - <a href="#"
-				ng-click="vm.deleteUser(user.id)">Delete</a>
-			</li>
-		</ul>
-		<p>&nbsp;</p>
+		
 		<p>
 			<a href="#/login" class="btn btn-primary">Logout</a>
 		</p>
@@ -46,21 +39,14 @@
 	<script src="resources/js/jars/bootstrap.min.js"></script>
 
 
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-cookies.js"></script>
+    <script src="<c:url value='/resources/js/app.js' />"></script>
+	<script src="<c:url value='/resources/js/service/user_service.js' />"></script>
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-cookies.js"></script>
-	<script src="<c:url value='/resources/js/app.js' />"></script>
-	<script src="<c:url value='/resources/js/service/user.service.js' />"></script>
-	<script
-		src="<c:url value='/resources/js/controller/login.controller.js' />"></script>
-	<script
-		src="<c:url value='/resources/js/service/authentication.service.js' />"></script>
-	<script src="<c:url value='/resources/js/service/flash.service.js' />"></script>
-
+		src="<c:url value='/resources/js/controller/user_controller.js' />"></script>
+	
 </body>
 </html>
