@@ -1,5 +1,4 @@
-'use strict';
+//'use strict';
 
-var App = angular.module('wcp',['ngResource']);
-
+var app = angular.module('wcp',['ngResource']);
 

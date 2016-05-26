@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -19,10 +20,21 @@
     <![endif]-->
 
 </head>
-<body ng-app="wcp" class="ng-cloak">
-	<div class="generic-container" >
-		<h1 align="center">${message}</h1>
-		
+<body ng-app="app" class="ng-cloak">
+	<div class="generic-container">
+		<h1>Hi {{vm.user.firstName}}!</h1>
+		<p>You're logged in!!</p>
+		<h3>All registered users:</h3>
+		<ul>
+			<li ng-repeat="user in vm.allUsers">{{user.username}}
+				({{user.firstName}} {{user.lastName}}) - <a href="#"
+				ng-click="vm.deleteUser(user.id)">Delete</a>
+			</li>
+		</ul>
+		<p>&nbsp;</p>
+		<p>
+			<a href="#/login" class="btn btn-primary">Logout</a>
+		</p>
 	</div>
 
 	<!-- Scripts always at the end of body-->
@@ -31,16 +43,24 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="resources/js/jars/bootstrap.min.js"></script>
+
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
-	<script src="<c:url value='/resources/js/app.js' />"></script>
-	<script src="<c:url value='/resources/js/service/user_service.js' />"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
 	<script
-		src="<c:url value='/resources/js/controller/user_controller.js' />"></script>
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-cookies.js"></script>
+	<script src="<c:url value='/resources/js/app.js' />"></script>
+	<script src="<c:url value='/resources/js/service/user.service.js' />"></script>
+	<script
+		src="<c:url value='/resources/js/controller/login.controller.js' />"></script>
+	<script
+		src="<c:url value='/resources/js/service/authentication.service.js' />"></script>
+	<script src="<c:url value='/resources/js/service/flash.service.js' />"></script>
 
 </body>
 </html>

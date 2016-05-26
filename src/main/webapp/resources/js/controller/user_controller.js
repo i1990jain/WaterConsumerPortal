@@ -3,7 +3,7 @@
  */
 'use strict';
 
-App.controller('LoginController', [ '$scope', '$resource', 	function($scope, $resource) {
+app.controller('LoginController', [ '$scope', '$resource', 	function($scope, $resource) {
 	
 	
 	$scope.login = function() {

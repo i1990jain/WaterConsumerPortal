@@ -12,7 +12,7 @@ public class HomeController {
 	public ModelAndView homePage() {
 		System.out.println("yo");
 		String message = "Water Consumer Portal";
-		return new ModelAndView("welcome", "message", message);
+		return new ModelAndView("login", "message", message);
 	}
 
 	/*
