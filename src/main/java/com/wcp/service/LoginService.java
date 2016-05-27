@@ -27,14 +27,14 @@ public class LoginService {
 
 		try {
 			session.beginTransaction();
-			String hql = "select u.oid from User u where u.username=:username and u.password=:password";
+			String hql = "select oid from User where username=:username and password=:password";
 
 			System.out.println(hql);
 			System.out.println("username: " + user.getUsername());
 			System.out.println("password: " + user.getPassword());
 			Query query = session.createQuery(hql);
 
-			query.setParameter("userName", user.getUsername());
+			query.setParameter("username", user.getUsername());
 			query.setParameter("password", user.getPassword());
 			List result = query.list();
 			System.out.println(result);
