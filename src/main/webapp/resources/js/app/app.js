@@ -15,7 +15,7 @@ app.config(function ($routeProvider, $httpProvider) {
             			templateUrl: 'login.html',
                         publicAccess: true})
             .when('/home',
-                    {controller: 'LoginController',
+                    {controller: 'HomeController',
                         templateUrl: 'home.html'});
 
 
