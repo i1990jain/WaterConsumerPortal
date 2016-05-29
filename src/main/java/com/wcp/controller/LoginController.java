@@ -10,17 +10,17 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.wcp.model.User;
 import com.wcp.service.LoginService;
 
-@RestController
+@Controller
 public class LoginController {
 
 	@Autowired
@@ -31,6 +31,7 @@ public class LoginController {
 	public ResponseEntity<Map<String, Object>> loginAction(@RequestBody User jsonString)
 			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
 		System.out.println("login yayy" + jsonString.getUsername());
+		System.out.println(jsonString);
 		User user = new User();
 		user.setUsername(jsonString.getUsername());
 		user.setPassword(jsonString.getPassword());

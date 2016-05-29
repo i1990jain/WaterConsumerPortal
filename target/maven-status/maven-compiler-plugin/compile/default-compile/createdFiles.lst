@@ -1,12 +1,16 @@
 com\wcp\model\User.class
 com\wcp\service\HibernateUtil.class
+com\wcp\controller\PageTemplateController.class
 com\wcp\model\Building.class
+com\wcp\config\WaterConsumerPortalConfiguration.class
 com\wcp\model\ConsumerSegment.class
 com\wcp\model\District.class
 com\wcp\model\MeterReading.class
 com\wcp\model\SimpleDeviceInstance.class
+com\wcp\config\WaterConsumerPortalInitializer.class
 com\wcp\model\ComplexDeviceInstance.class
 com\wcp\model\Module.class
+com\wcp\config\CORSFilter.class
 com\wcp\model\DeviceType.class
 com\wcp\model\Household.class
 com\wcp\model\DeviceConsumption.class

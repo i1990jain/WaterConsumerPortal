@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.wcp.model.User;
 
-@Service
+@Service("loginService")
 @Transactional
 public class LoginService {
 
