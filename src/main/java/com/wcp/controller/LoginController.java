@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.wcp.model.User;
@@ -53,10 +52,4 @@ public class LoginController {
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 
-	@RequestMapping("/home")
-	public ModelAndView homePage() {
-		System.out.println("loading user");
-		String message = "Water Consumer Portal";
-		return new ModelAndView("home", "message", message);
-	}
 }

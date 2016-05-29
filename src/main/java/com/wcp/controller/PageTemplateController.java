@@ -11,4 +11,10 @@ public class PageTemplateController {
 	public String getComputersTemplate() {
 		return "pages/login";
 	}
+
+	@RequestMapping("/home")
+	public String homePage() {
+		System.out.println("loading user");
+		return "pages/home";
+	}
 }

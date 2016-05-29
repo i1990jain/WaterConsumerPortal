@@ -1,9 +1,9 @@
 'use strict';
 
-app.controller('HomeController', [ '$scope', '$resource', 	function($scope, $resource, $rootScope) {
+app.controller('HomeController', [ '$scope','$http','$location',	function($scope,$http,$location) {
 	
 	
-	$scope.login = function() {
+	/*$scope.login = function() {
 		
 		console.log('username:password @' + $scope.username + ','
 				+ $scope.password);
@@ -22,5 +22,5 @@ app.controller('HomeController', [ '$scope', '$resource', 	function($scope, $res
 				 $rootScope.$emit("HomeController", {});
 			}
 		});
-	};
+	};*/
 }]);

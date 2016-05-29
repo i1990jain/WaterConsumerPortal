@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('LoginController', [ '$scope','$http',	function($scope,$http) {
+app.controller('LoginController', [ '$scope','$http','$location',	function($scope,$http,$location) {
 	
 		              
 	$scope.login = function() {
@@ -15,7 +15,8 @@ app.controller('LoginController', [ '$scope','$http',	function($scope,$http) {
         $http.post('login/',data)
                 .then(
                         function(response){
-                        	 
+                        	$location.path('/app/home');
+                        	console.log('success');
                         }, 
                         function(errResponse){
                         	 console.error('Error while creating user');
