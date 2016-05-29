@@ -1,7 +1,7 @@
 //'use strict';
 
-var app = angular.module('wcp',['ngRoute']);
-var httpHeaders, message;
+var app = angular.module('wcp',['ngRoute','ngMessages', 'ngStorage']);
+
 
 
 app.config(function ($routeProvider) {
@@ -18,4 +18,25 @@ app.config(function ($routeProvider) {
 
     
    
+});
+
+app.run(function ($rootScope, $http, $location, $localStorage) {
+	
+	
+    // redirect to login page if not logged in and trying to access a restricted page
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+    	
+    	 if ($localStorage.currentUser) {
+    		 console.log("user already logged in")
+    	    	$location.path('/app/home');
+    	        $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+    	    }
+    	 
+        var publicPages = ['/app/login'];
+        var restrictedPage = publicPages.indexOf($location.path()) === -1;
+        if (restrictedPage && !$localStorage.currentUser) {
+        	console.log("restricted page")
+            $location.path('/app/login');
+        }
+    });
 });

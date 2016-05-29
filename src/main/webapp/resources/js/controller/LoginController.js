@@ -3,27 +3,21 @@
  */
 'use strict';
 
-app.controller('LoginController', [ '$scope','$http','$location',	function($scope,$http,$location) {
-	
-		              
-	$scope.login = function() {
-		var data = {
-				username : $scope.username,
-				password : $scope.password
-		};
-        
-        $http.post('login/',data)
-                .then(
-                        function(response){
-                        	$location.path('/app/home');
-                        	console.log('success');
-                        }, 
-                        function(errResponse){
-                        	 console.error('Error while creating user');
-                            
-                        }
-                );
-	   };
+app.controller('LoginController', [ '$scope','$http','$location','AuthenticationService',	function($scope,$http,$location,AuthenticationService) {
+	var user = this;
+
+    user.login = login;
+    
+    function login() {
+		$scope.loading = true;
+    AuthenticationService.Login($scope.username, $scope.password, function (result) {
+        if (result === true) {
+            $location.path('/app/home');
+        } else {
+        	$scope.error = 'Username or password is incorrect';
+        	$scope.loading = false;
+        }
+    });};
 }]);
 
 

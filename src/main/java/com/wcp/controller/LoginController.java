@@ -47,7 +47,7 @@ public class LoginController {
 		Map<String, Object> map = new HashMap<>();
 		String message = jsonString.getUsername() + "Welcome";
 		map.put("username", jsonString.getUsername());
-		map.put("result", "success");
+		map.put("token", result);
 
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}

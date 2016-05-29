@@ -1,26 +1,14 @@
 'use strict';
 
-app.controller('HomeController', [ '$scope','$http','$location',	function($scope,$http,$location) {
+app.controller('HomeController', [ '$scope','$http','$location','AuthenticationService',	function($scope,$http,$location,AuthenticationService) {
+	var user = this;
 	
+	user.logout = logout;
 	
-	/*$scope.login = function() {
+	function logout() {
+		console.log("here")
+		 $location.path('/app/login');
+		 AuthenticationService.Logout();
 		
-		console.log('username:password @' + $scope.username + ','
-				+ $scope.password);
-
-		var User = $resource('login/');
-
-		User.save({
-			username : $scope.username,
-			password : $scope.password
-		}, function(response) {
-			
-			$scope.message = response.message;
-			console.log($scope.message);
-			if(scope.message.result="success"){
-				
-				 $rootScope.$emit("HomeController", {});
-			}
-		});
-	};*/
+	};
 }]);
