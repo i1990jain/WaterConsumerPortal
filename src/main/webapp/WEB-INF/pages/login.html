@@ -3,7 +3,11 @@
 		<h1 align="center">Water Consumer Portal</h1>
 		<form class="form-signin" ng-submit="ctrl.login()" name="loginForm">
 		<div class="loginmodal-container">
-
+		
+		<div class="alert alert-info" ng-show="message">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+     {{error}}
+  </div>
 			
 				<h3 class="form-signin-heading" align="center">Sign In</h3>
 				
@@ -15,6 +19,8 @@
 			<div class="login-help">
 				<a href="#">Register</a>
 			</div>
+			
+			
 		</div>
 	</div>
 	

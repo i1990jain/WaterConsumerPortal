@@ -34,6 +34,9 @@
                         // execute callback with false to indicate failed login
                         callback(false);
                     }
+                }).error(function(response){
+                	callback(false);
+                    console.log(response);                   
                 });
         }
 

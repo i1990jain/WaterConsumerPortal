@@ -27,29 +27,33 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@Produces({ MediaType.APPLICATION_JSON })
-	public ResponseEntity<Map<String, Object>> loginAction(@RequestBody User jsonString)
+	public ResponseEntity<Map<String, Object>> loginAction(@RequestBody User user)
 			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
-		System.out.println("login yayy" + jsonString.getUsername());
-		System.out.println(jsonString);
-		User user = new User();
-		user.setUsername(jsonString.getUsername());
-		user.setPassword(jsonString.getPassword());
+		System.out.println("login yayy" + user.getUsername());
+		System.out.println(user);
 
 		System.out.println("username: " + user.getUsername());
 		System.out.println("password: " + user.getPassword());
 
 		int result = loginService.userLogin(user);
+		if (result != 0) {
+			user.setOid(result);
 
-		user.setOid(result);
+			System.out.println("the result is " + result);
 
-		System.out.println("the result is " + result);
+			Map<String, Object> map = new HashMap<>();
 
-		Map<String, Object> map = new HashMap<>();
+			map.put("username", user.getUsername());
+			map.put("token", result);
 
-		map.put("username", jsonString.getUsername());
-		map.put("token", result);
+			return new ResponseEntity<>(map, HttpStatus.OK);
+		} else {
+			Map<String, Object> map = new HashMap<>();
 
-		return new ResponseEntity<>(map, HttpStatus.OK);
+			map.put("username", user.getUsername());
+
+			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
+		}
 	}
 
 }
