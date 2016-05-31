@@ -3,10 +3,15 @@
  */
 'use strict';
 
-app.controller('LoginController', [ '$scope','$http','$location','AuthenticationService',	function($scope,$http,$location,AuthenticationService) {
+app.controller('LoginController', [ '$rootScope','$scope','$http','$location','AuthenticationService',	function($rootScope,$scope,$http,$location,AuthenticationService) {
 	var user = this;
 	
     user.login = login;
+    
+    $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
+		$rootScope.animation = currRoute.animation;
+	  });
+    
     
     function login() {
 		

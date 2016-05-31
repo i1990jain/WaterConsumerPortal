@@ -1,0 +1,43 @@
+@CHARSET "ISO-8859-1";
+
+/* Default view */
+.view{
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  transition: 500ms;
+}
+
+/* First animation*/
+.first .view.ng-enter{
+  left: -100%;
+}
+
+.first .view.ng-enter.ng-enter-active{
+  left: 0%;
+}
+
+.first .view.ng-leave{
+  left: 0%;
+}
+
+.first .view.ng-leave.ng-leave-active{
+  left: 100%;
+}
+
+/* Second animation*/
+.second .view.ng-enter{
+  left: 100%;
+}
+
+.second .view.ng-enter.ng-enter-active{
+  left: 0%;
+}
+
+.second .view.ng-leave{
+  left: 0%;
+}
+
+.second .view.ng-leave.ng-leave-active{
+  left: -100%;
+}

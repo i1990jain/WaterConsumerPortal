@@ -1,6 +1,6 @@
 //'use strict';
 
-var app = angular.module('wcp',['ngRoute','ngMessages', 'ngStorage']);
+var app = angular.module('wcp',['ngRoute','ngAnimate','ngMessages', 'ngStorage']);
 
 
 
@@ -10,10 +10,12 @@ app.config(function ($routeProvider) {
             .when('/app/login',
             		{controller: 'LoginController',
     					templateUrl: 'app/login',
+    					animation: 'first',
 						publicAccess: true})
             .when('/app/home',
                     {controller: 'HomeController',
-                        templateUrl: 'app/home'})
+                        templateUrl: 'app/home',
+                        animation: 'second'})
             .when('/app/histogram',
                     {controller: 'HistogramController',
                         templateUrl: 'app/histogram'})

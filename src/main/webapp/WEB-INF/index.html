@@ -9,6 +9,7 @@
 <!-- Bootstrap -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="resources/css/welcome.css" rel="stylesheet">
+<link href="resources/css/animations.css" rel="stylesheet">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -17,10 +18,10 @@
     <![endif]-->
 
 </head>
-<body ng-app="wcp" class="ng-cloak">
+<body ng-app="wcp" class="ng-cloak"  ng-class="animation">
 
 
-<div ng-view></div>
+<div ng-view class="view">
 
 
 <!-- Scripts always at the end of body-->
@@ -38,6 +39,7 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-cookies.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-animate.min.js"></script>
     <script type="text/javascript" src="resources/js/app/app.js"></script>
     <script type="text/javascript" src="resources/js/controller/LoginController.js"></script>
     <script type="text/javascript" src="resources/js/controller/HomeController.js"></script>

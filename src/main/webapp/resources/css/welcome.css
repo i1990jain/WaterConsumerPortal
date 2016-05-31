@@ -81,8 +81,8 @@
   /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
 }
 
-.alert-info{
-	background: #fff;
+.alert-danger{
+	
 	border: 0px;
 }
 
