@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageTemplateController {
 
 	@RequestMapping(value = "/login")
-	public String getComputersTemplate() {
+	public String getLogin() {
 		return "pages/login";
 	}
 
@@ -16,5 +16,11 @@ public class PageTemplateController {
 	public String homePage() {
 		System.out.println("loading user");
 		return "pages/home";
+	}
+
+	@RequestMapping("/histogram")
+	public String loadHistogram() {
+		System.out.println("loading histogram");
+		return "pages/histogram";
 	}
 }

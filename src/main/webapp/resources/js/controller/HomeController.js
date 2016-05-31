@@ -5,6 +5,7 @@ app.controller('HomeController', [ '$scope','$http','$location','AuthenticationS
 	
 	user.logout = logout;
 	
+	
 	function logout() {
 		console.log("here")
 		 $location.path('/app/login');

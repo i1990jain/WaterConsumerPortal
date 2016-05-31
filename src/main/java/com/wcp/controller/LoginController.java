@@ -45,7 +45,7 @@ public class LoginController {
 		System.out.println("the result is " + result);
 
 		Map<String, Object> map = new HashMap<>();
-		String message = jsonString.getUsername() + "Welcome";
+
 		map.put("username", jsonString.getUsername());
 		map.put("token", result);
 

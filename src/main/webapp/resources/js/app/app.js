@@ -14,6 +14,9 @@ app.config(function ($routeProvider) {
             .when('/app/home',
                     {controller: 'HomeController',
                         templateUrl: 'app/home'})
+            .when('/app/histogram',
+                    {controller: 'HistogramController',
+                        templateUrl: 'app/histogram'})
             .otherwise('/app/login');
 
     
