@@ -19,10 +19,18 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
         if (result === true) {
             $location.path('/app/home');
         } else {
+        	console.log(result);  
         	console.log('invalid user');
+        	
+        	if(result==='Unauthorized'){
+        	$scope.error = 'Username or Password is incorrect';
+        	}
+        	if(result==='NoHouseHoldId'){
+        		$scope.error = $scope.username+' has no HouseholdId associated';
+        	}
+        	
         	$scope.username="";
         	$scope.password="";
-        	$scope.error = 'Username or Password is incorrect';
         	$scope.message = true;
         }
     });};

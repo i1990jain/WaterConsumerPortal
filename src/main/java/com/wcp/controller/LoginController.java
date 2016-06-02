@@ -29,30 +29,41 @@ public class LoginController {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ResponseEntity<Map<String, Object>> loginAction(@RequestBody User user)
 			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
+
 		System.out.println("login yayy" + user.getUsername());
 		System.out.println(user);
 
 		System.out.println("username: " + user.getUsername());
 		System.out.println("password: " + user.getPassword());
 
-		int result = loginService.userLogin(user);
-		if (result != 0) {
-			user.setOid(result);
+		Map<String, String> resultMap = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
+		resultMap = loginService.userLogin(user);
 
-			System.out.println("the result is " + result);
+		System.out.println("result from login service" + resultMap);
 
-			Map<String, Object> map = new HashMap<>();
+		if (!resultMap.get("userId").toString().equals("0") && !resultMap.get("houseHoldId").toString().equals("0")) {
+
+			user.setOid(Integer.parseInt(resultMap.get("userId")));
+
+			System.out.println("the result is " + resultMap.get("userId"));
 
 			map.put("username", user.getUsername());
-			map.put("token", result);
+			map.put("token", resultMap.get("userId"));
 
 			return new ResponseEntity<>(map, HttpStatus.OK);
-		} else {
-			Map<String, Object> map = new HashMap<>();
+		} else if (!resultMap.get("userId").toString().equals("0")
+				&& resultMap.get("houseHoldId").toString().equals("0")) {
 
 			map.put("username", user.getUsername());
+			map.put("response", "NoHouseHoldId");
 
 			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
+		} else {
+			map.put("username", user.getUsername());
+			map.put("response", "Unauthorized");
+			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
+
 		}
 	}
 

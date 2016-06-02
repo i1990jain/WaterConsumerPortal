@@ -3,7 +3,6 @@
 /* Default view */
 .view{
   position: absolute;
-  top: 100px;
   width: 100%;
   transition: 500ms;
 }
