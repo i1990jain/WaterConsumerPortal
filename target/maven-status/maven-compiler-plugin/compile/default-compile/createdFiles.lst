@@ -19,3 +19,4 @@ com\wcp\controller\LoginController.class
 com\wcp\model\NeutralUser.class
 com\wcp\model\SmartMeter.class
 com\wcp\service\LoginService.class
+com\wcp\service\DatabaseService.class
