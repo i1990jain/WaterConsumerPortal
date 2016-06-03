@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
 
     var navListItems = $('div.setup-panel div a'),
             allWells = $('.setup-content'),
@@ -53,7 +53,7 @@ var fileInput1 = document.getElementById('action_json');
 		    	fileInput.addEventListener('change', function(e) {
 			var file = fileInput.files[0];
 			var textType = /text.*/;
-
+/*
 			if (file.type.match(textType)) {
 				var reader = new FileReader();
 
@@ -86,7 +86,7 @@ var fileInput1 = document.getElementById('action_json');
     		var file = fileInput1.files[0];
 			var textType = /text.*/;
 
-			if (file.type.match(textType)) {
+		/*	if (file.type.match(textType)) {
 				var reader = new FileReader();
 
 				reader.onload = function(e) {
@@ -143,4 +143,4 @@ var fileInput1 = document.getElementById('action_json');
     
     
     
-});
+});*/

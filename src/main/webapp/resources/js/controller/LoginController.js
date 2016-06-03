@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('LoginController', [ '$rootScope','$scope','$http','$location','AuthenticationService',	function($rootScope,$scope,$http,$location,AuthenticationService) {
+app.controller('LoginController', [ '$rootScope','$scope','$http','$location','AuthenticationService','DataService',	function($rootScope,$scope,$http,$location,AuthenticationService,DataService) {
 	var user = this;
 	
     user.login = login;
@@ -18,6 +18,8 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
     AuthenticationService.Login($scope.username, $scope.password, function (result) {
         if (result === true) {
             $location.path('/app/home');
+            DataService.username=$scope.username;
+            console.log(DataService.username);
         } else {
         	console.log(result);  
         	console.log('invalid user');
@@ -35,6 +37,3 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
         }
     });};
 }]);
-
-
-
