@@ -1,10 +1,12 @@
 app.controller('HistogramController', [ '$scope','$http','$location',	function($scope,$http,$location) {
 	
 	
-		Highcharts.chart('container',{
+	 $scope.chartConfig = {
+			 options: {
 	        chart: {
 	            type: 'column'
-	        },
+	        }
+			 },
 	        title: {
 	            text: 'Water Consumption'
 	        },
@@ -23,7 +25,7 @@ app.controller('HistogramController', [ '$scope','$http','$location',	function($
 	            name: 'John',
 	            data: [5, 7, 3]
 	        }]
-	    });
+	    }
 	
 	
 	
