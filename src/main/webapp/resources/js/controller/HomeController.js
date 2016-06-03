@@ -1,11 +1,11 @@
 'use strict';
 
-app.controller('HomeController', [ '$scope','$http','$location','AuthenticationService','DataService',	function($scope,$http,$location,AuthenticationService,DataService) {
+app.controller('HomeController', [ '$scope','$http','$location','AuthenticationService','$localStorage',	function($scope,$http,$location,AuthenticationService,$localStorage) {
 	var user = this;
 	
 	user.logout = logout;
 	
-	$scope.username=DataService.username;
+	$scope.username=$localStorage.currentUser.username;
 	
 	
 	function logout() {
