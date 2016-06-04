@@ -23,4 +23,10 @@ public class PageTemplateController {
 		System.out.println("loading histogram");
 		return "pages/histogram";
 	}
+	
+	@RequestMapping("/register")
+	public String register() {
+		System.out.println("loading histogram");
+		return "pages/register";
+	}
 }
