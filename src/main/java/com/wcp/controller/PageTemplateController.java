@@ -26,7 +26,7 @@ public class PageTemplateController {
 	
 	@RequestMapping("/register")
 	public String register() {
-		System.out.println("loading histogram");
+		System.out.println("Loading register page");
 		return "pages/register";
 	}
 }

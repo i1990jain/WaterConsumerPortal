@@ -20,8 +20,11 @@ app.config(function ($routeProvider) {
 			.when('/app/histogram',
 					{controller: 'HistogramController',
 				templateUrl: 'app/histogram'})
+			.when('/app/register',
+				{controller: 'RegisterController',
+			templateUrl: 'app/register'})	
 				.otherwise('/app/login');
-
+			
 
 
 });
@@ -38,7 +41,7 @@ app.run(function ($rootScope, $http, $location, $localStorage,$window) {
 			$http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
 		}
 
-		var publicPages = ['/app/login'];
+		var publicPages = ['/app/login','/app/register'];
 		var restrictedPage = publicPages.indexOf($location.path()) === -1;
 		if (restrictedPage && !$localStorage.currentUser) {
 			console.log("restricted page")
