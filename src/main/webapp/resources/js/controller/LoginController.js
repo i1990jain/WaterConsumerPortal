@@ -7,7 +7,7 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
 	var user = this;
 	
     user.login = login;
-    
+    user.register = register;
     $rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
 		$rootScope.animation = currRoute.animation;
 	  });
@@ -35,4 +35,7 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
         	$scope.message = true;
         }
     });};
+    function register() {
+    	 $location.path('/app/register');
+    }
 }]);
