@@ -29,12 +29,12 @@
 		</plugins>
 		<finalName>WaterConsumerPortal</finalName>
 	</build>
-	
+
 	<properties>
 		<springframework.version>4.2.0.RELEASE</springframework.version>
 		<jackson.version>2.5.3</jackson.version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- Testing -->
 		<dependency>
@@ -73,7 +73,7 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-		
+
 
 
 		<dependency>
@@ -81,7 +81,7 @@
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>
 		</dependency>
-		
+
 		<!-- javax -->
 
 		<dependency>
@@ -95,6 +95,15 @@
 			<artifactId>persistence-api</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160212</version>
+		</dependency>
+
+
+
 
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
