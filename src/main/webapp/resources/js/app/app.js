@@ -1,6 +1,6 @@
 //'use strict';
 
-var app = angular.module('wcp',['ngRoute','ngAnimate','ngMessages', 'ngStorage','highcharts-ng']);
+var app = angular.module('wcp',['ngRoute','ngAnimate','ngMessages', 'ngStorage','highcharts-ng','ngMaterial','ngSanitize']);
 
 
 
