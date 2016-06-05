@@ -1,13 +1,31 @@
+<div id="wrapper" ng-controller="HomeController as hmctrl">
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-brand"><a href="#"> Water Consumer Portal
+			</a></li>
+			<li>
+                    <button ng-click="hmctrl.logout()" class="btn btn-primary">Logout</button>
+					
+                </li>
 
-	<div class="generic-container" ng-controller="HomeController as hmctrl">
-		<h1 align="center">Water Consumer Portal</h1>
-		<h1>Hi! {{username}}</h1>
-		<p>You're logged in!!</p>
-		
-		<p>
-			<button  ng-click="hmctrl.logout()" class="btn btn-primary">Logout</button>
-		</p>
-		<ng-include src="getPartial()"></ng-include>
-		
+		</ul>
 	</div>
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="generic-container">
+						<!-- <h1>Water Consumer Portal</h1> -->
+						<h2>Hi! {{username}}</h2>
+						
+						<!-- <p>
+							<button ng-click="hmctrl.logout()" class="btn btn-primary">Logout</button>
+						</p> -->
+						<ng-include src="getPartial()"></ng-include>
 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

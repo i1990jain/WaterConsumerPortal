@@ -1,6 +1,8 @@
 
  
-  <div ng-controller="HistogramController" style="width:100%; height:400px;">
-  <p>something wrong here</p>
-<highchart id="chart1" config="chartConfig" class="span10"></highchart>
+  <div ng-controller="HistogramController" style="height:400px;">
+ <div align="right">
+ <select ng-init="chartType = types[0]" ng-options="type as type.name for type in types " ng-model="chartType" ng-change="chartTypeChange()" ></select>
+   </div>
+<highchart id="chart" config="chartConfig" class="span10"></highchart>
 </div>
