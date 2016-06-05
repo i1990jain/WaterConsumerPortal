@@ -10,6 +10,8 @@ import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +23,7 @@ import com.wcp.datamodel.RegisterData;
 @Transactional
 public class RegisterService {
 
-	public Map<String, String> registeration(RegisterData registerdata)
+	public Map<String, String> registration(RegisterData registerdata)
 			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -43,7 +45,7 @@ public class RegisterService {
 			System.out.println("Password : "+ registerdata.getPassword());
 			System.out.println("ConfirmPassword : "+ registerdata.getConfirmPassword());
 
-			String smartMeterCheck = "select smart_meter_id from smart_meter where (oid = (select smart_meter_oid from household where oid = (select household_oid from neutral_user where user_oid = 37))) AND (building_oid = (select building_oid from household where oid =householdid )";
+			String smartMeterCheck = "select smart_meter_id from smart_meter where (oid = (select smart_meter_oid from household where oid =householdid ) AND (building_oid = (select building_oid from household where oid =householdid )";
 
 			System.out.println(smartMeterCheck);
 
@@ -65,7 +67,7 @@ public class RegisterService {
 			if (smartMeterID != 0) {
 
 				String register = "Insert into user(oid,username,email,firstname,lastname,password) values (oid,username,email,firstname,lastname,password)";
-
+				
 
 				System.out.println(register);
 
@@ -95,6 +97,9 @@ public class RegisterService {
 				 * 
 				 * } }
 				 */
+			}else{
+				map.put("response", "Unauthorized");
+				
 			}
 			/*
 			map.put("userId", userId.toString());

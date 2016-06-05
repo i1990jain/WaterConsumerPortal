@@ -24,7 +24,7 @@ import com.wcp.datamodel.RegisterData;
 public class RegisterController {
 
 	@Autowired
-	RegisterService RegisterService;
+	RegisterService registerService;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -42,7 +42,7 @@ public class RegisterController {
 		Map<String, String> resultMap = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
 
-		resultMap = RegisterService.register(registerdata);
+		resultMap = registerService.registration(registerdata);
 
 		System.out.println("result from register service" + resultMap);
 
@@ -67,24 +67,31 @@ public class RegisterController {
 		}else if (resultMap.get("username").toString().equals("0")&& !resultMap.get("firstname").toString().equals("0")&& !resultMap.get("lastname").toString().equals("0")&& !resultMap.get("zipcode").toString().equals("0")&&!resultMap.get("email").toString().equals("0")&&!resultMap.get("password").toString().equals("0")&&!resultMap.get("confirmpassword").toString().equals("0")
 				&& !resultMap.get("houseHoldId").toString().equals("0")) {
 			map.put("response", "NoUsername");
+			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
 		}else if (!resultMap.get("username").toString().equals("0")&& resultMap.get("firstname").toString().equals("0")&& !resultMap.get("lastname").toString().equals("0")&& !resultMap.get("zipcode").toString().equals("0")&&!resultMap.get("email").toString().equals("0")&&!resultMap.get("password").toString().equals("0")&&!resultMap.get("confirmpassword").toString().equals("0")
 				&& !resultMap.get("houseHoldId").toString().equals("0")) {
 			map.put("response", "NoFirstname");
+			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
 		}else if (!resultMap.get("username").toString().equals("0")&& !resultMap.get("firstname").toString().equals("0")&& resultMap.get("lastname").toString().equals("0")&& !resultMap.get("zipcode").toString().equals("0")&&!resultMap.get("email").toString().equals("0")&&!resultMap.get("password").toString().equals("0")&&!resultMap.get("confirmpassword").toString().equals("0")
 				&& !resultMap.get("houseHoldId").toString().equals("0")) {
 			map.put("response", "Nolastname");
+			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
 		}else if (!resultMap.get("username").toString().equals("0")&& !resultMap.get("firstname").toString().equals("0")&& !resultMap.get("lastname").toString().equals("0")&& resultMap.get("zipcode").toString().equals("0")&&!resultMap.get("email").toString().equals("0")&&!resultMap.get("password").toString().equals("0")&&!resultMap.get("confirmpassword").toString().equals("0")
 				&& !resultMap.get("houseHoldId").toString().equals("0")) {
 			map.put("response", "Nozipcode");
+			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
 		}else if (!resultMap.get("username").toString().equals("0")&& !resultMap.get("firstname").toString().equals("0")&& !resultMap.get("lastname").toString().equals("0")&& !resultMap.get("zipcode").toString().equals("0")&&resultMap.get("email").toString().equals("0")&&!resultMap.get("password").toString().equals("0")&&!resultMap.get("confirmpassword").toString().equals("0")
 				&& !resultMap.get("houseHoldId").toString().equals("0")) {
 			map.put("response", "Noemailid");
+			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
 		}else if (!resultMap.get("username").toString().equals("0")&& !resultMap.get("firstname").toString().equals("0")&& !resultMap.get("lastname").toString().equals("0")&& !resultMap.get("zipcode").toString().equals("0")&&!resultMap.get("email").toString().equals("0")&&resultMap.get("password").toString().equals("0")&&!resultMap.get("confirmpassword").toString().equals("0")
 				&& !resultMap.get("houseHoldId").toString().equals("0")) {
 			map.put("response", "Nopassword");
+			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
 		}else if (!resultMap.get("username").toString().equals("0")&& !resultMap.get("firstname").toString().equals("0")&& !resultMap.get("lastname").toString().equals("0")&& !resultMap.get("zipcode").toString().equals("0")&&!resultMap.get("email").toString().equals("0")&&!resultMap.get("password").toString().equals("0")&&resultMap.get("confirmpassword").toString().equals("0")
 				&& !resultMap.get("houseHoldId").toString().equals("0")) {
 			map.put("response", "Noconfirmpassword");
+			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
 		}
 		else {
 			map.put("username", registerdata.getUsername());
@@ -92,6 +99,7 @@ public class RegisterController {
 			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
 
 		}
+
 	}
 }
 
