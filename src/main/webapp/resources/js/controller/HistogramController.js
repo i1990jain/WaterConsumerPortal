@@ -24,7 +24,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			var checkdate=datesfromreading.toDateString();
 			
 			if(readingDateString===checkdate){
-				console.log(checkdate);
+				
 				var hours = datesfromreading.getHours();
 				var minutes = "0" + datesfromreading.getMinutes();
 				var seconds = "0" + datesfromreading.getSeconds();
@@ -33,11 +33,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 		}
 		tmpl=tmpl.concat('</ul>');
 		
-		/*for (i = 0; i < timestamp.length; i += 1) {
-			var time=new Date(timestamp[i]);
-			console.log(time);
-			
-		}*/
+		
 		
 		
 		
@@ -136,26 +132,49 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			var consumption=0;
 			var currentTempReadingDate = new Date(array[j].readingDateTime);
 			var currentTempReadingDateString = currentTempReadingDate.toDateString();
+			var nextTempReadingDate;
+			var nextTempReadingDateString;
 			for (var i in array) {
 							
-				var nextTempReadingDate = new Date(array[i].readingDateTime);
-				var nextTempReadingDateString = nextTempReadingDate.toDateString();
+				 nextTempReadingDate = new Date(array[i].readingDateTime);
+				
+				 nextTempReadingDateString = nextTempReadingDate.toDateString();
 					
 								
 				if(currentTempReadingDateString!==nextTempReadingDateString){
-					console.log(array[i-1].totalConsumptionAdjusted+"and"+array[j].totalConsumptionAdjusted);
+					
 					consumption=array[i-1].totalConsumptionAdjusted-array[j].totalConsumptionAdjusted;
-					if(consumption<0){
-						consumption=consumption*-1;
-					}
-					var reading=[array[j].readingDateTime,consumption];
+					
+					var reading=[array[i-1].readingDateTime,consumption];
 					chartdata.push(reading);
+					j=i;
 					currentTempReadingDate = new Date(array[i].readingDateTime);
 					currentTempReadingDateString = currentTempReadingDate.toDateString();
-					j=i;
+					
 				}												
 				
 			}
+			var lastConsumption=0;
+			j=0;
+			for (var i in array) {
+				
+				var currentTempReadingDate = new Date(array[i].readingDateTime);
+				var currentTempReadingDateString = currentTempReadingDate.toDateString();
+				
+				if(j!=array.length-1){
+				if(currentTempReadingDateString===nextTempReadingDateString){
+				
+				lastConsumption=lastConsumption+(array[j+1].totalConsumptionAdjusted-array[i].totalConsumptionAdjusted)
+				
+				}
+				}
+				j++;
+			
+				
+			}
+			
+			var finalReading=[array[j-1].readingDateTime,lastConsumption];
+			chartdata.push(finalReading);
 			
 			chartdata.sort();
 			
@@ -165,7 +184,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 				data:chartdata,
 				cursor: 'pointer',
 				tooltip: {
-                    valueDecimals: 1,
+                    valueDecimals: 3,
                     valueSuffix: ' m\u00B3'
                 },
 				dataGrouping: {
@@ -180,12 +199,9 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 				point: {
                     events: {
                         click: function () {
-                        	console.log(this);
+                        	
                         	$scope.showAlert(this.x,this.series.processedXData,this.series.processedYData);
-                            //alert('Category: ' + this.series.processedXData + ', value: ' + this.series.processedYData);
-                            /*this.series.tooltip.formatter= function() {
-                                return 'Extra data: <b>'+ this.series.processedXData +'</b>';
-                            };*/
+                           
                         }
                     }
                 }

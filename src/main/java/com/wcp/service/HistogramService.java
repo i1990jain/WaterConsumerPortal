@@ -39,7 +39,7 @@ public class HistogramService {
 		List<ReadingData> readingDataList = new ArrayList<ReadingData>();
 		try {
 			session.beginTransaction();
-			String consumptionData = "from MeterReading where smart_meter_oid =:smartMeterId";
+			String consumptionData = "from MeterReading m where smart_meter_oid =:smartMeterId ORDER BY m.readingDateTime";
 
 			Query query = session.createQuery(consumptionData);
 
