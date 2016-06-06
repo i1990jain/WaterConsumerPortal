@@ -2,8 +2,10 @@
  
   <div ng-controller="HistogramController" style="height:400px;" >
  <div align="right">
+
+ <p><b>Daily Consumption for</b>
  <select ng-init="chartType = types[0]" ng-options="type as type.name for type in types " ng-model="chartType" ng-change="chartTypeChange()" ></select>
-   </div>
+  </p> </div>
 <highchart id="chart" config="chartConfig" class="span10"></highchart>
 <div id="popupContainer">
 </div>
