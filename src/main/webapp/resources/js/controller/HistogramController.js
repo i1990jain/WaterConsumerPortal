@@ -65,6 +65,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 					alignTicks: false
 				},
 				rangeSelector: {
+					
 					buttons: [{
 	                    type: 'month',
 	                    count: 1,
@@ -106,6 +107,9 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 		Highcharts.setOptions({
 			global: {
 				useUTC: false
+			},
+			lang:{
+				rangeSelectorZoom: 'Select the time span to observe:'
 			}
 		});
 		$scope.toggleLoading();
@@ -127,16 +131,45 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			}
 			readingData.sort();
 			
+			var chartdata=[];
+			var j=0;
+			var consumption=0;
+			var currentTempReadingDate = new Date(array[j].readingDateTime);
+			var currentTempReadingDateString = currentTempReadingDate.toDateString();
+			for (var i in array) {
+							
+				var nextTempReadingDate = new Date(array[i].readingDateTime);
+				var nextTempReadingDateString = nextTempReadingDate.toDateString();
+					
+								
+				if(currentTempReadingDateString!==nextTempReadingDateString){
+					console.log(array[i-1].totalConsumptionAdjusted+"and"+array[j].totalConsumptionAdjusted);
+					consumption=array[i-1].totalConsumptionAdjusted-array[j].totalConsumptionAdjusted;
+					if(consumption<0){
+						consumption=consumption*-1;
+					}
+					var reading=[array[j].readingDateTime,consumption];
+					chartdata.push(reading);
+					currentTempReadingDate = new Date(array[i].readingDateTime);
+					currentTempReadingDateString = currentTempReadingDate.toDateString();
+					j=i;
+				}												
+				
+			}
+			
+			chartdata.sort();
+			
+			
 			$scope.chartConfig.series.push({
 				name: 'Consumption',
-				data:readingData,
+				data:chartdata,
 				cursor: 'pointer',
 				tooltip: {
                     valueDecimals: 1,
                     valueSuffix: ' m\u00B3'
                 },
 				dataGrouping: {
-		            approximation: "average",
+		            approximation: "sum",
 		            enabled: true,
 		            units: [[
 		                'day',
