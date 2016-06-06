@@ -3,7 +3,7 @@
   <div ng-controller="HistogramController" style="height:400px;" >
  <div align="right">
 
- <p><b>Daily Consumption for</b>
+ <p><b>Display Consumption for</b>
  <select ng-init="chartType = types[0]" ng-options="type as type.name for type in types " ng-model="chartType" ng-change="chartTypeChange()" ></select>
   </p> </div>
 <highchart id="chart" config="chartConfig" class="span10"></highchart>
