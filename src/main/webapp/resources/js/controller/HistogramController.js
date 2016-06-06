@@ -2,11 +2,54 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 
 	
 	var readingData =[];
+	var chartdata=[];
 	
 	$scope.toggleLoading = function () {
 		this.chartConfig.loading = !this.chartConfig.loading
 	}
-	
+
+
+	$scope.userAverage = function (userAveragebox) {
+		if($scope.userAveragebox){ 
+			
+			var sum = 0;
+			for( var i = 0; i < chartdata.length; i++ ){
+				
+			    sum += chartdata[i][1]; //don't forget to add the base
+			}
+
+			var avg = sum/chartdata.length;
+			avg=avg.toFixed(2);
+			
+			console.log(avg);
+			this.chartConfig.yAxis.plotLines=[{
+                color: 'red',
+                value: avg,
+                width: '2',
+                zIndex: 2,
+                label: { 
+                    text: 'Daily Average: '+avg, // Content of the label. 
+                    align: 'center', // Positioning of the label. 
+                    verticalAlign: "top"
+                  }
+            }];
+			
+			
+			/*$scope.chartConfig.series.push({
+				id: 'Daily Average',
+				 name: 'Daily Average',
+			      data: average,
+			      type: 'line'
+			      
+			});*/
+		   }else{
+			   
+			   this.chartConfig.yAxis.plotLines='';
+			   //$scope.chartConfig.series.splice(1,1)
+			   
+		   }
+		
+	}
 	
 	
 	$scope.showAlert = function(date,timestamp, value) {
@@ -127,7 +170,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			}
 			readingData.sort();
 			
-			var chartdata=[];
+			
 			var j=0;
 			var consumption=0;
 			var currentTempReadingDate = new Date(array[j].readingDateTime);
@@ -178,8 +221,12 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			
 			chartdata.sort();
 			
+			var lastUpdateDate = new Date(array[j-1].readingDateTime);
+				
+			$scope.lastUpdate= lastUpdateDate.toDateString();
 			
 			$scope.chartConfig.series.push({
+				id: 'Consumption',
 				name: 'Consumption',
 				data:chartdata,
 				cursor: 'pointer',
@@ -209,7 +256,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 
 			
 
-
+			
 			$scope.toggleLoading();
 		});
 	});
@@ -226,12 +273,14 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			$scope.chartConfig.series[0].dataGrouping.units=[['week',[1]]];
 			this.chartConfig.options.rangeSelector.selected=2;
 			$scope.chartConfig.series[0].cursor='';
+			 this.chartConfig.yAxis.plotLines='';
 		}
 		
 		if($scope.chartType.name==="Months"){
 			$scope.chartConfig.series[0].dataGrouping.units=[['month',[1]]];
 			this.chartConfig.options.rangeSelector.selected=3;
 			$scope.chartConfig.series[0].cursor='';
+			 this.chartConfig.yAxis.plotLines='';
 		}
 	}
 	

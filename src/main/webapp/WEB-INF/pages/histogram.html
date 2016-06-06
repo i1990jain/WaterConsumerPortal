@@ -1,12 +1,34 @@
 
- 
-  <div ng-controller="HistogramController" style="height:400px;" >
- <div align="right">
 
- <p><b>Display Consumption for</b>
- <select ng-init="chartType = types[0]" ng-options="type as type.name for type in types " ng-model="chartType" ng-change="chartTypeChange()" ></select>
-  </p> </div>
-<highchart id="chart" config="chartConfig" class="span10"></highchart>
-<div id="popupContainer">
-</div>
+<div  ng-controller="HistogramController" style="height: 400px;">
+
+	<div align="left">
+		Data updated on: <b> {{lastUpdate}}</b><br>
+
+		
+	</div>
+	<br/>
+	<p>
+	your daily average
+	<input
+	
+    type="checkbox"
+    ng-model="userAveragebox"
+    ng-change="userAverage(userAveragebox)">
+		</p>
+		
+		
+	<div align="right">
+
+		<p>
+			<b>Display Consumption for</b>
+			
+			
+			 <select class="selectpicker" ng-init="chartType = types[0]"
+				ng-options="type as type.name for type in types "
+				ng-model="chartType" ng-change="chartTypeChange()"></select>
+		</p>
+	</div>
+	<highchart id="chart" config="chartConfig" class="span10"></highchart>
+	<div id="popupContainer"></div>
 </div>
