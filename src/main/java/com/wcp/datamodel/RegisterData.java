@@ -8,8 +8,8 @@ public class RegisterData {
 	private String confirmPassword;
 	private int zipCode;
 	private int householdID;
-	private String smartmterID;
-	private String username;
+	private String smartMeterID;
+	private String userName;
 	private String oid;
 
 	
@@ -56,18 +56,18 @@ public class RegisterData {
 	public void setHouseholdID(int householdID) {
 		this.householdID = householdID;
 	}
-	public String getSmartmterID() {
-		return smartmterID;
+	public String getSmartMeterID() {
+		return smartMeterID;
 	}
-	public void setSmartmterID(String smartmterID) {
-		this.smartmterID = smartmterID;
+	public void setSmartmeterID(String smartMeterID) {
+		this.smartMeterID = smartMeterID;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getOid() {
 		return oid;
