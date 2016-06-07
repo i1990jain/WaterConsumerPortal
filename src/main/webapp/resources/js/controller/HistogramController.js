@@ -3,9 +3,47 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 	
 	var readingData =[];
 	var chartdata=[];
+	var neighbourAvg;
+	
+	$scope.getNeighbourhoodAverage = function () {
+		var zipcode=$localStorage.currentUser.zipcode;
+		var data = {
+				zipcode : zipcode
+		};
+		
+		$http.post('nbhavg/', data)
+		.success(function (response) {
+			neighbourAvg=response.result;
+		});
+	}
 	
 	$scope.toggleLoading = function () {
 		this.chartConfig.loading = !this.chartConfig.loading
+	}
+	
+	$scope.neighbourhoodAveragebox=false;
+	$scope.neighbourhoodAverage = function (neighbourhoodAveragebox) {
+		if($scope.neighbourhoodAveragebox){ 
+			
+			this.chartConfig.yAxis.plotLines=[{
+                color: 'red',
+                value: neighbourAvg,
+                width: '2',
+                zIndex: 2,
+                label: { 
+                    text: 'Neighbourhood average: '+neighbourAvg, // Content of the label. 
+                    align: 'center', // Positioning of the label. 
+                    verticalAlign: "top"
+                  }
+            }];
+			
+		}else{
+			   
+			   this.chartConfig.yAxis.plotLines='';
+			   //$scope.chartConfig.series.splice(1,1)
+			   
+		   }
+		
 	}
 
 	$scope.userAveragebox=false;
@@ -253,6 +291,8 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			
 			$scope.toggleLoading();
 		});
+		
+		//$scope.getNeighbourhoodAverage();
 	});
 
 	$scope.chartTypeChange = function () {
