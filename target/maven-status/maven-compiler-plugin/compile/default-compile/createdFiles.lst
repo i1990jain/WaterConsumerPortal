@@ -1,3 +1,4 @@
+com\wcp\datamodel\UserData.class
 com\wcp\controller\RegisterController.class
 com\wcp\controller\PageTemplateController.class
 com\wcp\model\Building.class
@@ -14,6 +15,7 @@ com\wcp\model\SmartMeter.class
 com\wcp\service\LoginService.class
 com\wcp\service\HistogramService.class
 com\wcp\service\DatabaseService.class
+com\wcp\service\HomeService.class
 com\wcp\service\RegisterService.class
 com\wcp\model\User.class
 com\wcp\service\HibernateUtil.class

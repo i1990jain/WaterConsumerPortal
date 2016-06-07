@@ -18,14 +18,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.wcp.datamodel.ReadingData;
+import com.wcp.datamodel.UserData;
 import com.wcp.model.User;
 import com.wcp.service.HistogramService;
+import com.wcp.service.HomeService;
 
 @Controller
 public class HomeController {
 
 	@Autowired
 	HistogramService histogramService;
+
+	@Autowired
+	HomeService homeService;
 
 	@RequestMapping(value = "/histogram", method = RequestMethod.POST)
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -35,6 +40,21 @@ public class HomeController {
 		List<ReadingData> meterReadingList = histogramService.dailyComsumption(user);
 
 		map.put("result", meterReadingList);
+
+		System.out.println(map);
+
+		return new ResponseEntity<>(map, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/userdata", method = RequestMethod.POST)
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResponseEntity<Map<String, Object>> userData(@RequestBody User user)
+			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
+		Map<String, Object> map = new HashMap<>();
+		UserData userData = homeService.getUserData(user);
+
+		map.put("result", userData);
 
 		System.out.println(map);
 

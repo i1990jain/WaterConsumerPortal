@@ -8,7 +8,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 		this.chartConfig.loading = !this.chartConfig.loading
 	}
 
-
+	$scope.userAveragebox=false;
 	$scope.userAverage = function (userAveragebox) {
 		if($scope.userAveragebox){ 
 			
@@ -274,6 +274,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			this.chartConfig.options.rangeSelector.selected=2;
 			$scope.chartConfig.series[0].cursor='';
 			 this.chartConfig.yAxis.plotLines='';
+			 $scope.userAveragebox=false;
 		}
 		
 		if($scope.chartType.name==="Months"){
@@ -281,6 +282,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			this.chartConfig.options.rangeSelector.selected=3;
 			$scope.chartConfig.series[0].cursor='';
 			 this.chartConfig.yAxis.plotLines='';
+			 $scope.userAveragebox=false;
 		}
 	}
 	

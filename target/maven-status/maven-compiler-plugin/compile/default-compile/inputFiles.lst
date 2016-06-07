@@ -9,6 +9,7 @@ C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\datamodel\Reading
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\config\WaterConsumerPortalConfiguration.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\model\Module.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\service\HibernateUtil.java
+C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\service\HomeService.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\controller\HomeController.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\model\User.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\service\DatabaseService.java
@@ -18,6 +19,7 @@ C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\service\LoginServ
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\controller\LoginController.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\controller\PageTemplateController.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\model\SimpleDeviceInstance.java
+C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\datamodel\UserData.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\config\CORSFilter.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\model\SmartMeter.java
 C:\Users\Rishabh\git\WaterConsumerPortal\src\main\java\com\wcp\service\RegisterService.java
