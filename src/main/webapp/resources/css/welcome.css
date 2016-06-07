@@ -99,3 +99,11 @@
 .login-help{
   font-size: 12px;
 }
+
+.media
+    {
+        
+        margin: 10px 0;
+        padding:5px;
+        border-width: 10px;
+    }

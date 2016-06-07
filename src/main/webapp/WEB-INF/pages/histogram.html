@@ -1,6 +1,7 @@
 
 
-<div  ng-controller="HistogramController" style="height: 400px;">
+<div  ng-controller="HistogramController" >
+
 
 	<div align="left">
 		Data updated on: <b> {{lastUpdate}}</b><br>
@@ -17,7 +18,6 @@
     ng-change="userAverage(userAveragebox)">
 		</p>
 		
-		
 	<div align="right">
 
 		<p>
@@ -29,6 +29,7 @@
 				ng-model="chartType" ng-change="chartTypeChange()"></select>
 		</p>
 	</div>
+	
 	<highchart id="chart" config="chartConfig" class="span10"></highchart>
 	<div id="popupContainer"></div>
 </div>
