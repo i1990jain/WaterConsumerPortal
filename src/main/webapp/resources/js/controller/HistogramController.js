@@ -35,13 +35,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
             }];
 			
 			
-			/*$scope.chartConfig.series.push({
-				id: 'Daily Average',
-				 name: 'Daily Average',
-			      data: average,
-			      type: 'line'
-			      
-			});*/
+			
 		   }else{
 			   
 			   this.chartConfig.yAxis.plotLines='';

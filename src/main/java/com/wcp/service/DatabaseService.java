@@ -2,7 +2,8 @@ package com.wcp.service;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -12,156 +13,70 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.wcp.datamodel.ReadingData;
 import com.wcp.model.MeterReading;
-import com.wcp.model.User;
 
-@Service("homePageService")
+@Service("databaseService")
 @Transactional
-
 public class DatabaseService {
-	// HomePage display
-	// //////////////////////////////////////////////////////////////////////////////////
-
-	public MeterReading dailyComsumption(User user)
-			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
-
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
-		Session session = sessionFactory.openSession();
-
-		// int userId = 0;
-		MeterReading meterReading = new MeterReading();
-		try {
-			session.beginTransaction();
-			String sysDateConsumption = "select total_consumption from meter_reading where (reading_date_time = CURDATE()) AND oid = "
-					+ user.getOid() + " order by reading_date_time; ";
-
-			System.out.println(sysDateConsumption);
-			Query query = session.createQuery(sysDateConsumption);
-
-			List result = query.list();
-			System.out.println(result);
-			System.out.println("resultset:" + result);
-
-			Iterator iterator = result.iterator();
-			while (iterator.hasNext()) {
-				BigDecimal a = (BigDecimal) iterator.next();
-				meterReading.setTotalConsumption(a);
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		} finally {
-			session.close();
-		}
-		return meterReading;
-	}
-
-	///////// According to Menu Button
-	///////// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public MeterReading WeeklyAndMonthlyComsumption(User user, int b)
-			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
-
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
-		Session session = sessionFactory.openSession();
-
-		// int userId = 0;
-		MeterReading meterReading = new MeterReading();
-		try {
-			session.beginTransaction();
-			String sysWeekConsumption = " SELECT * FROM meter_reading WHERE (DATE_SUB(CURDATE(), INTERVAL 7 DAY)) AND oid = "
-					+ user.getOid() + " order by reading_date_time; ";
-			String sysMonthConsumption = " SELECT * FROM meter_reading WHERE (DATE_SUB(CURDATE(), INTERVAL 1 MONTH)) AND oid = "
-					+ user.getOid() + " order by reading_date_time; ";
-
-			if (b == 1) {
-				System.out.println(sysWeekConsumption);
-
-				Query query = session.createQuery(sysWeekConsumption);
-
-				List result = query.list();
-				System.out.println(result);
-				System.out.println("resultset:" + result);
-
-				Iterator iterator = result.iterator();
-				while (iterator.hasNext()) {
-					BigDecimal a = (BigDecimal) iterator.next();
-					meterReading.setTotalConsumption(a);
-				}
-			} else {
-				System.out.println(sysMonthConsumption);
-
-				Query query = session.createQuery(sysMonthConsumption);
-
-				List result = query.list();
-				System.out.println(result);
-				System.out.println("resultset:" + result);
-
-				Iterator iterator = result.iterator();
-				while (iterator.hasNext()) {
-					BigDecimal a = (BigDecimal) iterator.next();
-					meterReading.setTotalConsumption(a);
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		} finally {
-			session.close();
-		}
-		return meterReading;
-	}
 
 	//////////// Average Consumption of the user and Average Consumption of the
-	//////////// neighbourhood/////////////////////////////
-	public MeterReading AverageComsumption(User user, int b)
+
+	public Double averageComsumption(String zipcode)
 			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
-
+		Double nbhAverage = 0.0;
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
+		List result = new ArrayList();
 		Session session = sessionFactory.openSession();
 
 		// int userId = 0;
 		MeterReading meterReading = new MeterReading();
 		try {
 			session.beginTransaction();
-			String sysUserAvgConsumption = " SELECT * FROM meter_reading WHERE (DATE_SUB(CURDATE(), INTERVAL 7 DAY)) AND oid = "
-					+ user.getOid() + " order by reading_date_time; ";
-			String sysNeighAvgConsumption = " select * from meter_reading a JOIN household b where a.smart_meter_oid = b.smart_meter_oid AND b.building_oid IN (select building_oid from building where district_oid = (select district_oid from district where zipcode = 6652));";
+			List<Double> userAverage = new ArrayList();
+			BigDecimal userTotal = new BigDecimal(0);
+			Double nbhTotal = 0.0;
 
-			if (b == 1) {
-				System.out.println(sysUserAvgConsumption);
+			// get smartmeter oid of buildings in the given zipcode
+			String neighSmartmeters = " select sm.oid from SmartMeter sm where sm.building.oid IN (select blg.oid from Building blg where blg.district.oid IN (select oid from District where zipcode = :zipcode))";
 
-				Query query = session.createQuery(sysUserAvgConsumption);
+			Query neighSmartmetersQuery = session.createQuery(neighSmartmeters);
+			neighSmartmetersQuery.setParameter("zipcode", zipcode);
+			result = neighSmartmetersQuery.list();
 
-				List result = query.list();
-				System.out.println(result);
-				System.out.println("resultset:" + result);
+			for (Object id : result) {
+				List<ReadingData> dailyreadingDataList = new ArrayList<ReadingData>();
+				List<ReadingData> perDayDataList = new ArrayList<ReadingData>();
+				String consumptionData = "from MeterReading m where smart_meter_oid =:smartMeterId ORDER BY m.readingDateTime";
 
-				Iterator iterator = result.iterator();
-				while (iterator.hasNext()) {
-					BigDecimal a = (BigDecimal) iterator.next();
-					meterReading.setTotalConsumption(a);
-				}
-			} else {
-				System.out.println(sysNeighAvgConsumption);
+				Query query = session.createQuery(consumptionData);
 
-				Query query = session.createQuery(sysNeighAvgConsumption);
+				query.setParameter("smartMeterId", id);
 
-				List result = query.list();
-				System.out.println(result);
-				System.out.println("resultset:" + result);
+				List perDayresult = query.list();
+				if (!perDayresult.isEmpty()) {
+					dailyreadingDataList = getReadingData(perDayresult);
 
-				Iterator iterator = result.iterator();
-				while (iterator.hasNext()) {
-					BigDecimal a = (BigDecimal) iterator.next();
-					meterReading.setTotalConsumption(a);
+					perDayDataList = getAllReadings(dailyreadingDataList);
+
+					for (ReadingData rd : perDayDataList) {
+
+						userTotal = userTotal.add(rd.getTotalConsumptionAdjusted());
+
+					}
+					Double d = userTotal.doubleValue();
+					userTotal = new BigDecimal(0);
+					System.out.println(d / perDayDataList.size());
+					userAverage.add(d / perDayDataList.size());
+
 				}
 			}
+
+			for (Double val : userAverage) {
+				nbhTotal = nbhTotal + val;
+			}
+
+			nbhAverage = nbhTotal / userAverage.size();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,7 +84,98 @@ public class DatabaseService {
 		} finally {
 			session.close();
 		}
-		return meterReading;
+		return nbhAverage;
+	}
+
+	private List<ReadingData> getAllReadings(List<ReadingData> readingDataList) {
+
+		List<ReadingData> resultList = new ArrayList();
+		int i = 0, j = 0;
+		BigDecimal consumption;
+
+		Date currentTempReadingDate = new Date();
+		currentTempReadingDate = readingDataList.get(j).getReadingDateTime();
+
+		String currentTempReadingDateString = String.valueOf(currentTempReadingDate.getDate())
+				+ String.valueOf(currentTempReadingDate.getMonth()) + String.valueOf(currentTempReadingDate.getYear());
+
+		Date nextTempReadingDate;
+		String nextTempReadingDateString = null;
+
+		for (ReadingData rd : readingDataList) {
+
+			nextTempReadingDate = new Date();
+			nextTempReadingDate = rd.getReadingDateTime();
+
+			nextTempReadingDateString = String.valueOf(nextTempReadingDate.getDate())
+					+ String.valueOf(nextTempReadingDate.getMonth()) + String.valueOf(nextTempReadingDate.getYear());
+
+			if (!currentTempReadingDateString.equals(nextTempReadingDateString)) {
+				consumption = readingDataList.get(i - 1).getTotalConsumptionAdjusted()
+						.subtract(readingDataList.get(j).getTotalConsumptionAdjusted());
+
+				ReadingData newrd = new ReadingData();
+				newrd.setReadingDateTime(currentTempReadingDate);
+				newrd.setTotalConsumptionAdjusted(consumption);
+
+				resultList.add(newrd);
+				j = i;
+				currentTempReadingDate = new Date();
+				currentTempReadingDate = readingDataList.get(i).getReadingDateTime();
+				currentTempReadingDateString = String.valueOf(currentTempReadingDate.getDate())
+						+ String.valueOf(currentTempReadingDate.getMonth())
+						+ String.valueOf(currentTempReadingDate.getYear());
+
+			}
+			i++;
+
+		}
+
+		BigDecimal lastConsumption = new BigDecimal(0);
+		j = 0;
+		i = 0;
+		for (ReadingData rd : readingDataList) {
+
+			Date currentTempReadingDate1 = new Date();
+			currentTempReadingDate1 = rd.getReadingDateTime();
+			String currentTempReadingDateString1 = String.valueOf(currentTempReadingDate1.getDate())
+					+ String.valueOf(currentTempReadingDate1.getMonth())
+					+ String.valueOf(currentTempReadingDate1.getYear());
+
+			if (j != readingDataList.size() - 1) {
+				if (currentTempReadingDateString1.equals(nextTempReadingDateString)) {
+
+					lastConsumption = lastConsumption.add(readingDataList.get(j + 1).getTotalConsumptionAdjusted()
+							.subtract(readingDataList.get(i).getTotalConsumptionAdjusted()));
+
+				}
+			}
+			j++;
+			i++;
+
+		}
+
+		ReadingData newrd = new ReadingData();
+		newrd.setReadingDateTime(readingDataList.get(j - 1).getReadingDateTime());
+		newrd.setTotalConsumptionAdjusted(lastConsumption);
+
+		resultList.add(newrd);
+		return resultList;
+
+	}
+
+	private List<ReadingData> getReadingData(List<MeterReading> input) {
+		List<ReadingData> readingDataList = new ArrayList<ReadingData>();
+
+		for (MeterReading reading : input) {
+			ReadingData obj = new ReadingData();
+			obj.setOid(reading.getOid());
+			obj.setReadingDateTime(reading.getReadingDateTime());
+			obj.setTotalConsumptionAdjusted(reading.getTotalConsumptionAdjusted());
+			readingDataList.add(obj);
+		}
+
+		return readingDataList;
 	}
 
 }
