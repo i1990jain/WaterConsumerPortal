@@ -18,15 +18,19 @@ app.config(function ($routeProvider) {
 			.when('/app/histogram',
 					{controller: 'HistogramController',
 				templateUrl: 'app/histogram'})
-			.when('/app/register',
-				{controller: 'RegisterController',
-			templateUrl: 'app/register',
-			animation: 'second'	})
-			.when('/app/registersuccess',
-				{templateUrl: 'app/registersuccess',
-					animation: 'second'})
-				.otherwise('/app/login');
-			
+				.when('/app/register',
+						{controller: 'RegisterController',
+					templateUrl: 'app/register',
+					animation: 'second'	})
+					.when('/app/mapview',
+							{controller: 'HomeController',
+						templateUrl: 'app/mapview'
+							})
+							.when('/app/registersuccess',
+									{templateUrl: 'app/registersuccess',
+								animation: 'second'})
+								.otherwise('/app/login');
+
 
 
 });
@@ -39,7 +43,14 @@ app.run(function ($rootScope, $http, $location, $localStorage,$window) {
 
 		if ($localStorage.currentUser) {
 			console.log("user already logged in")
-			$location.path('/app/home');
+			if($localStorage.currentUser.pagetoken=== "2"){
+			$location.path('/app/mapview');
+			}
+			
+			if($localStorage.currentUser.pagetoken=== "1"){
+				$location.path('/app/home');
+				
+			}
 			$http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
 		}
 

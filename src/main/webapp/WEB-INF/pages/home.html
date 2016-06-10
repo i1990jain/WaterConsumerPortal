@@ -1,18 +1,27 @@
-<div id="wrapper" ng-controller="HomeController as hmctrl">
+<div ng-controller="HomeController as hmctrl">
+
+<div id="wrapper">
 	<div id="sidebar-wrapper">
 		<ul class="sidebar-nav">
 			<li class="sidebar-brand"><a href="#"> Water Consumer Portal
 			</a></li>
 			<li>
-				<button ng-click="hmctrl.logout()" class="btn btn-primary">Logout</button>
+				<button ng-click="hmctrl.logout()" class="btn btn-primary" style="width:90%">Logout</button>
 
+			</li>
+			<li><br></li>
+			<li><button  class="btn btn-primary" style="width:90%"> Home</button></li>
+			
+			<li>
+				 
+			<button ng-click="hmctrl.loadMapView()" class="btn btn-primary" style="width:90%">Map</button>
 			</li>
 
 		</ul>
 	</div>
-	<div id="page-content-wrapper">
+	<div id="page-content-wrapper" >
 		<div class="container-fluid">
-			<!-- <div class="row"> -->
+			
 				
 										
 						<div class="col-lg-8">
@@ -41,8 +50,9 @@
 					
 				</div>
 				<ng-include src="getPartial()"></ng-include>
-			<!-- </div> -->
+			
 			
 		</div>
 	
+</div>
 </div>
