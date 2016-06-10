@@ -1,30 +1,27 @@
 
-	<div class="generic-container" ng-controller="LoginController as ctrl">
-		<h1 align="center">Water Consumer Portal</h1>
-		<form class="form-signin" ng-submit="ctrl.login()" name="loginForm">
+<div class="generic-container" ng-controller="LoginController as ctrl">
+	<h1 align="center">Water Consumer Portal</h1>
+	<form class="form-signin" ng-submit="ctrl.login()" name="loginForm">
 		<div class="loginmodal-container">
-		
-		<div class="alert alert-danger" ng-show="message">
-     {{error}}
-  </div>
-			
-				<h3 class="form-signin-heading" align="center">Sign In</h3>
-				
-				<input type="text" required="" ng-model="username" id="uname" class="form-control" name="user" placeholder="Username"> 
-				<input type="password" required="" class="form-control" ng-model="password" id="password" name="pass" placeholder="Password">
-				 <input type="submit" name="login" class="btn btn-primary btn-lg " value="Login">
+
+			<div class="alert alert-danger" ng-show="message">{{error}}</div>
+
+			<h3 class="form-signin-heading" align="center">Sign In</h3>
+
+			<input type="text" required="" ng-model="username" id="uname" class="form-control" name="user" placeholder="Username"> 
+			<input type="password" required="" class="form-control" ng-model="password" id="password" name="pass" placeholder="Password">
+			 <input type="submit" name="login" class="btn btn-primary btn-lg " value="Login">
 			<div class="login-help">
-				 <a ng-click="ctrl.register()" class="btn btn-link">Register</a>
+				<a ng-click="ctrl.register()" class="btn btn-link">Register</a>
 			</div>
-			</div>				
-			</form>
-
-			
-			
-			
 		</div>
-		
-		
+	</form>
 
-	
-	
+
+
+
+</div>
+
+
+
+

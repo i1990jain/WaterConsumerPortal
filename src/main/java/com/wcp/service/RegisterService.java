@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.wcp.model.Household;
+import com.wcp.model.NeutralUser;
 import com.wcp.model.User;
 import com.wcp.datamodel.RegisterData;
 
@@ -31,64 +33,114 @@ public class RegisterService {
 		Session session = sessionFactory.openSession();
 
 		String smartMeterID="" ;
-		Integer houseHoldId = 0;
+		//	Integer houseHoldId = 0;
 		Map<String, String> map = new HashMap<>();
 
 		try {
 			session.beginTransaction();
-			System.out.println("RegisterationCheck");
+			System.out.println("RegisterationCheckService");
+			System.out.println("User Name :" + registerdata.getUserName());
 			System.out.println("First Name :" + registerdata.getFirstName());
 			System.out.println("Last Name: " + registerdata.getLastName());
 			System.out.println("HouseholdID : "+ registerdata.getHouseholdID());
-		//	System.out.println("SmartmeterID : "+ registerdata.getSmartmterID());
+
+			//	System.out.println("SmartmeterID : "+ registerdata.getSmartmterID());
 			System.out.println("ZipCode : "+ registerdata.getZipCode());
 			System.out.println("Password : "+ registerdata.getPassword());
-			System.out.println("ConfirmPassword : "+ registerdata.getConfirmPassword());
 
-			String smartMeterCheck = "select smart_meter_id from smart_meter where (oid = (select smart_meter_oid from household where oid =householdid ) AND (building_oid = (select building_oid from household where oid =householdid )";
+			if(registerdata.getHouseholdID()!=0){
 
-			System.out.println(smartMeterCheck);
-			
+				String smartMeterCheck = "select smartMeterId from SmartMeter where (oid = (select smartMeter.oid from Household where oid=:householdOid))";
 
-			Query query = session.createQuery(smartMeterCheck);
+				System.out.println(smartMeterCheck);
 
-			query.setParameter("householdid",registerdata.getHouseholdID());
 
-			List result = query.list();
-			System.out.println(result);
-			System.out.println("resultset:" + result);
+				Query query = session.createQuery(smartMeterCheck);
 
-			Iterator iterator = result.iterator();
-			while (iterator.hasNext()) {
-				smartMeterID = (String) iterator.next();
-				
-			}
-			registerdata.setSmartmeterID(smartMeterID);
+				query.setParameter("householdOid",registerdata.getHouseholdID());
 
-			if (smartMeterID != null) {
+				List result = query.list();
+				System.out.println(result);
+				System.out.println("resultset:" + result);
 
-				String register = "Insert into user(oid,username,email,firstname,lastname,password) values (oid,username,email,firstname,lastname,password)";
+				Iterator iterator = result.iterator();
+				while (iterator.hasNext()) {
+					smartMeterID = (String) iterator.next();
 
-				System.out.println(register);
-				
-				Query registerquery = session.createQuery(register);
+				}
+				System.out.println(smartMeterID);
 
-				registerquery.setParameter("oid",registerdata.getOid());
-				registerquery.setParameter("username",registerdata.getUserName());
-				registerquery.setParameter("email",registerdata.getEmail());
-				registerquery.setParameter("firstname",registerdata.getFirstName());
-				registerquery.setParameter("lastname",registerdata.getLastName());
-				registerquery.setParameter("password",registerdata.getPassword());
-				
-				map.put("smartMeterID", smartMeterID);
-				map.put("response", "Authorized");
-				
-				
+				registerdata.setSmartmeterID(smartMeterID);
+
+				if (smartMeterID != null) {
+					int oid = 0;
+					String selectoid ="SELECT oid FROM User ORDER BY oid DESC";
+
+
+					System.out.println(selectoid);
+					Query selectoidquery = session.createQuery(selectoid);
+					selectoidquery.setMaxResults(1);
+
+					List result1 = selectoidquery.list();
+					System.out.println(result1);
+					System.out.println("resultset:" + result1);
+
+					Iterator iterator1 = result1.iterator();
+					while (iterator1.hasNext()) {
+						oid = (Integer) iterator1.next();
+
+					}
+					oid =oid+1;
+
+					System.out.println(oid);
+
+					User user=new User();
+					NeutralUser neutraluser = new NeutralUser();
+					Household houseHold = new Household();
+
+
+					user.setOid(oid);
+					user.setUsername(registerdata.getUserName());
+					user.setFirstName(registerdata.getFirstName());
+					user.setLastName(registerdata.getLastName());
+					user.setEmail(registerdata.getEmail());
+					user.setPassword(registerdata.getPassword());
+					session.save(user);
+
+					//Commit the transaction
+					session.getTransaction().commit();
+
+					System.out.println("insert into user table completed");
+					System.out.println(oid);
+
+					/*		 //Neutral User    
+		  						neutraluser.setUserOid(oid);		
+										user.setOid(oid);
+								houseHold.setOid(registerdata.getHouseholdID());
+								neutraluser.setUser(user);
+
+
+
+		  neutraluser.setHousehold(houseHold);		 
+			session.save(neutraluser);
+			//Commit the transaction
+				 session.getTransaction().commit();
+
+					 */				System.out.println("Insert completed");
+
+					 map.put("smartMeterID", smartMeterID);
+					 map.put("response", "Authorized");
+
+
+				}else{
+					map.put("response", "Unauthorized");
+
+				}
 			}else{
 				map.put("response", "Unauthorized");
-				
 			}
-			
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 

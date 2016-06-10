@@ -1,19 +1,16 @@
 package com.wcp.datamodel;
 
-public class RegisterData {
+public class RegisterData implements java.io.Serializable {
+
 	private String firstName;
 	private String lastName;
+	private String userName;
+	private String zipCode;
+	private int householdID;
 	private String email;
 	private String password;
-	private String confirmPassword;
-	private int zipCode;
-	private int householdID;
 	private String smartMeterID;
-	private String userName;
-	private String oid;
 
-	
-	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -38,16 +35,11 @@ public class RegisterData {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
-	public int getZipCode() {
+
+	public String getZipCode() {
 		return zipCode;
 	}
-	public void setZipCode(int zipCode) {
+	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
 	public int getHouseholdID() {
@@ -69,10 +61,5 @@ public class RegisterData {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getOid() {
-		return oid;
-	}
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
+
 }

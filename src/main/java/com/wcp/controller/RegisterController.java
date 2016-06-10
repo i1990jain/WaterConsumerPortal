@@ -31,14 +31,15 @@ public class RegisterController {
 	public ResponseEntity<Map<String, Object>> registerAction(@RequestBody RegisterData registerdata)
 			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
 
-		System.out.println("RegisterationCheck");
+		System.out.println("RegisterationCheckCOntroller");
+		System.out.println("User Name :" + registerdata.getUserName());
 		System.out.println("First Name :" + registerdata.getFirstName());
 		System.out.println("Last Name: " + registerdata.getLastName());
 		System.out.println("HouseholdID : "+ registerdata.getHouseholdID());
 		//	System.out.println("SmartmeterID : "+ registerdata.getSmartMeterID());
 		System.out.println("ZipCode : "+ registerdata.getZipCode());
 		System.out.println("Password : "+ registerdata.getPassword());
-		System.out.println("ConfirmPassword : "+ registerdata.getConfirmPassword());
+	
 
 		Map<String, String> resultMap = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
@@ -49,7 +50,7 @@ public class RegisterController {
 		if(resultMap.get("response").equals("Authorized")){
 
 			map.put("smartmeter", resultMap.get("smartMeterID"));
-			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>(map, HttpStatus.OK);
 
 		}else if (resultMap.get("response").equals("Unauthorized")){
 

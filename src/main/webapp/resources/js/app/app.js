@@ -2,8 +2,6 @@
 
 var app = angular.module('wcp',['ngRoute','ngAnimate','ngMessages', 'ngStorage','highcharts-ng','ngMaterial','ngSanitize']);
 
-
-
 app.config(function ($routeProvider) {
 
 	//configure the rounting of ng-view
@@ -41,7 +39,7 @@ app.run(function ($rootScope, $http, $location, $localStorage,$window) {
 			$http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
 		}
 
-		var publicPages = ['/app/login','/app/register'];
+		var publicPages = ['/app/login','/app/register','/app/registersucess'];
 		var restrictedPage = publicPages.indexOf($location.path()) === -1;
 		if (restrictedPage && !$localStorage.currentUser) {
 			console.log("restricted page")
