@@ -9,7 +9,7 @@ public class RegisterData implements java.io.Serializable {
 	private int householdID;
 	private String email;
 	private String password;
-	private String smartMeterID;
+	private String smartmeterid;
 
 	public String getFirstName() {
 		return firstName;
@@ -49,10 +49,10 @@ public class RegisterData implements java.io.Serializable {
 		this.householdID = householdID;
 	}
 	public String getSmartMeterID() {
-		return smartMeterID;
+		return smartmeterid;
 	}
-	public void setSmartmeterID(String smartMeterID) {
-		this.smartMeterID = smartMeterID;
+	public void setSmartmeterID(String smartmeterid) {
+		this.smartmeterid = smartmeterid;
 	}
 
 	public String getUserName() {

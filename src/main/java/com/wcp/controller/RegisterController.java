@@ -36,7 +36,7 @@ public class RegisterController {
 		System.out.println("First Name :" + registerdata.getFirstName());
 		System.out.println("Last Name: " + registerdata.getLastName());
 		System.out.println("HouseholdID : "+ registerdata.getHouseholdID());
-		//	System.out.println("SmartmeterID : "+ registerdata.getSmartMeterID());
+		System.out.println("SmartmeterID : "+ registerdata.getSmartMeterID());
 		System.out.println("ZipCode : "+ registerdata.getZipCode());
 		System.out.println("Password : "+ registerdata.getPassword());
 	

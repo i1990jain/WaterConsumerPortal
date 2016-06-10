@@ -44,7 +44,7 @@ public class RegisterService {
 			System.out.println("Last Name: " + registerdata.getLastName());
 			System.out.println("HouseholdID : "+ registerdata.getHouseholdID());
 
-			//	System.out.println("SmartmeterID : "+ registerdata.getSmartmterID());
+			System.out.println("SmartmeterID : "+ registerdata.getSmartMeterID());
 			System.out.println("ZipCode : "+ registerdata.getZipCode());
 			System.out.println("Password : "+ registerdata.getPassword());
 
@@ -72,7 +72,7 @@ public class RegisterService {
 
 				registerdata.setSmartmeterID(smartMeterID);
 
-				if (smartMeterID != null) {
+				if (!smartMeterID.isEmpty()) {
 					int oid = 0;
 					String selectoid ="SELECT oid FROM User ORDER BY oid DESC";
 
@@ -97,7 +97,7 @@ public class RegisterService {
 					User user=new User();
 					NeutralUser neutraluser = new NeutralUser();
 					Household houseHold = new Household();
-
+					houseHold.setOid(registerdata.getHouseholdID());
 
 					user.setOid(oid);
 					user.setUsername(registerdata.getUserName());
@@ -105,28 +105,15 @@ public class RegisterService {
 					user.setLastName(registerdata.getLastName());
 					user.setEmail(registerdata.getEmail());
 					user.setPassword(registerdata.getPassword());
+					
 					session.save(user);
-
-					//Commit the transaction
-					session.getTransaction().commit();
-
-					System.out.println("insert into user table completed");
-					System.out.println(oid);
-
-					/*		 //Neutral User    
-		  						neutraluser.setUserOid(oid);		
-										user.setOid(oid);
-								houseHold.setOid(registerdata.getHouseholdID());
-								neutraluser.setUser(user);
-
-
-
-		  neutraluser.setHousehold(houseHold);		 
-			session.save(neutraluser);
+					neutraluser.setUser(user);
+					neutraluser.setHousehold(houseHold);
+					session.save(neutraluser);
 			//Commit the transaction
 				 session.getTransaction().commit();
 
-					 */				System.out.println("Insert completed");
+					 			System.out.println("Insert completed");
 
 					 map.put("smartMeterID", smartMeterID);
 					 map.put("response", "Authorized");

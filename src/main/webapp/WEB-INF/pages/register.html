@@ -40,7 +40,7 @@
 					ng-show="registerform.householdid.$dirty && registerform.householdid.$error.required"
 					class="help-block">HouseholdId is required</span> <input
 					type="text" name="smartmterid" id="smartmterid"
-					ng-model="smartmeterid" ng-disabled="shouldBeDisabled"
+					ng-model="smartmeterid" ng-show="smartmeterid"
 					class="form-control" placeholder="SmartmeterID">
 			</div>
 

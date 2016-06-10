@@ -18,6 +18,7 @@
 					userName : username,
 					zipCode: zipcode,
 					householdID: householdid,
+					smartmeterid : smartmeterid,
 					email: email,  				
 					password : password
 

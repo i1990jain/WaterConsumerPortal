@@ -4,8 +4,9 @@
 app.controller('RegisterController', [ '$rootScope','$scope','$http','$location','RegisterService',	function($rootScope,$scope,$http,$location,RegisterService) {
 
 	$scope.name = 'smartmterid';
-	$scope.shouldBeDisabled = true;
+	$scope.show = true;
 
+	
 	var vm = this;
 	vm.register = register;
 
@@ -14,7 +15,7 @@ app.controller('RegisterController', [ '$rootScope','$scope','$http','$location'
 	});
 
 	function register(isValid) {
-		console.log($scope.firstname,$scope.lastname,$scope.username,$scope.zipcode,$scope.householdid,$scope.email,$scope.password)
+		console.log($scope.firstname,$scope.lastname,$scope.username,$scope.zipcode,$scope.householdid,$scope.smartmeterid,$scope.email,$scope.password)
 
 		
 		if (isValid) {
@@ -24,16 +25,16 @@ app.controller('RegisterController', [ '$rootScope','$scope','$http','$location'
 
 					$scope.smartmeter=result;
 					
-					$location.path('/app/registersucess');
+					$location.path('/app/registersuccess');
 
 				} else {
 					console.log(result);  
-					console.log('No householdID found');
-
+					
 					if(result==='Unauthorized'){
+						console.log("i am here");
 						$scope.error = 'Try to manually Give SmartMeterID again';
 							$scope.name = 'smartmterid';
-	    					$scope.shouldBeDisabled = false;
+	    					$scope.show = false;
 						 
 
 					}
