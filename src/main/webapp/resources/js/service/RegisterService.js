@@ -10,7 +10,7 @@
 
 		return service;
 
-		function register(firstname,lastname,username,zipcode,householdid,email,password,callback) {
+		function register(firstname,lastname,username,zipcode,householdid,smartmeterid,email,password,callback) {
 			console.log("I am here");
 			var data = {
 					firstName: firstname,
@@ -19,7 +19,7 @@
 					zipCode: zipcode,
 					householdID: householdid,
 					email: email,  				
-					password : password,
+					password : password
 
 			};
 			console.log(firstname,

@@ -1,59 +1,77 @@
-<div class="generic-container" ng-controller="RegisterController as ctrl">
+<div class="generic-container"
+	ng-controller="RegisterController as ctrl">
 
-	<form class="form-signin" name="registerform" novalidate ng-submit="ctrl.register(registerform.$valid)" >
-		
-		<div class="registermodal-container" >
-		
+	<form class="form-signin" name="registerform" novalidate
+		ng-submit="ctrl.register(registerform.$valid)">
+
+		<div class="registermodal-container">
+
 			<div class="alert alert-danger" ng-show="message">{{error}}</div>
 
 			<h3 class="form-signin-heading" align="center">Register here</h3>
-		<div class="row">	
-			<input type="text" name="firstname" id="firstname" ng-model="firstname" class="form-control" placeholder="First Name" ng-pattern="/^[A-Za-z]*$/" required>
-			<span ng-show="registerform.firstname.$dirty && registerform.firstname.$error.pattern" class="help-block">Must contain only Alphabet</span> 
-			
-			
-			<input type="text" name="lastname" id="lastname" ng-model="lastname" class="form-control" placeholder="Last Name" ng-pattern="/^[A-Za-z]*$/" required>
-	 	 	<span ng-show="registerform.lastname.$dirty && registerform.lastname.$error.pattern" class="help-block">Must contain only Alphabet</span>
-		
-		</div>	
-		<div class="row">  		
-			<input type="text" name="username" id="username" ng-model="username" class="form-control" placeholder="User Name" ng-minlength="3" ng-maxlength="8" ng-pattern="/^[A-Za-z]*$/" required>
-			<span ng-show="registerform.username.$error.minlength" class="help-block">Username is too short.</span>
-			<span ng-show="registerform.username.$error.maxlength" class="help-block">Username is too long.</span> 
-			<span ng-show="registerform.username.$dirty && registerform.username.$error.required" class="help-block">Username is required</span>
-			
-			
-			 <input type="text" name="zipcode" id="zipcode" ng-model="zipcode" class="form-control" placeholder="ZipCode" ng-pattern="/^[0-9]*$/" required>
-			  <span ng-show="registerform.zipcode.$dirty && registerform.zipcode.$error.required" class="help-block">Zipcode is required</span>
-		</div>	
-			<div class="row">   
-			  <input type="text" name="hosueholdID" id="householdid" ng-model="householdid" class="form-control input-sm" placeholder="HouseholdID" ng-pattern="/^[0-9]/" required>
-			  <span ng-show="registerform.householdid.$dirty && registerform.householdid.$error.required" class="help-block">HouseholdId is required</span> 
-			  
-			  <input type="text" name="smartmterid" id="smartmterid" ng-model="smartmeterid" ng-disabled="shouldBeDisabled" class="form-control" placeholder="SmartmeterID">
-			</div>
-			
-			<div class="row">	  
-			   <input type="email" name="email" id="email" ng-model="email" class="form-control" placeholder="Email Address" type="email"> 
-			</div>
-			
-			<div class="row">		   
-			   <div class="fieldset" ng-class="{'has-error':registerform.password.$invalid && !registerform.password.$pristine}">
-			   <input type="password" name="password" id="password" ng-model="password" class="form-control" placeholder="Password" ng-minlength="5" ng-maxlength="8" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/"required> 
-			   <p ng-show="registerform.password.$error.required" class="error">*</p>
-      		  <p ng-show="registerform.password.$error.minlength" class="error">
-          				Passwords must be between 8 and 20 characters.</p>
-        		<p ng-show="registerform.password.$error.pattern" class="error">
-        	  Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</p>
-		</div>	  	
-			<div class="login-help">
-			
-				<input type="submit" value="Register" class="btn btn-primary btn-lg"> 
-				<a href="#/login" class="btn btn-link">Cancel</a>
+			<div class="row">
+				<input type="text" name="firstname" id="firstname"
+					ng-model="firstname" class="form-control" placeholder="First Name"
+					ng-pattern="/^[A-Za-z]*$/" required> <span
+					ng-show="registerform.firstname.$dirty && registerform.firstname.$error.pattern"
+					class="help-block">Must contain only Alphabet</span> <input
+					type="text" name="lastname" id="lastname" ng-model="lastname"
+					class="form-control" placeholder="Last Name"
+					ng-pattern="/^[A-Za-z]*$/" required> <span
+					ng-show="registerform.lastname.$dirty && registerform.lastname.$error.pattern"
+					class="help-block">Must contain only Alphabet</span>
 
 			</div>
-	
-		</div>
+			<div class="row">
+				<input type="text" name="username" id="username" ng-model="username"
+					class="form-control" placeholder="User Name" ng-minlength="3"
+					ng-maxlength="8" ng-pattern="/^[A-Za-z]*$/" required> <span
+					ng-show="registerform.username.$error.minlength" class="help-block">Username
+					is too short.</span> <span
+					ng-show="registerform.username.$error.maxlength" class="help-block">Username
+					is too long.</span> <input type="text" name="zipcode" id="zipcode"
+					ng-model="zipcode" class="form-control" placeholder="ZipCode"
+					ng-pattern="/^[0-9]*$/" required>
+			</div>
+			<div class="row">
+				<input type="text" name="hosueholdID" id="householdid"
+					ng-model="householdid" class="form-control input-sm"
+					placeholder="HouseholdID" ng-pattern="/^[0-9]/" required> <span
+					ng-show="registerform.householdid.$dirty && registerform.householdid.$error.required"
+					class="help-block">HouseholdId is required</span> <input
+					type="text" name="smartmterid" id="smartmterid"
+					ng-model="smartmeterid" ng-disabled="shouldBeDisabled"
+					class="form-control" placeholder="SmartmeterID">
+			</div>
+
+			<div class="row">
+				<input type="email" name="email" id="email" ng-model="email"
+					class="form-control" placeholder="Email Address" type="email">
+			</div>
+
+			<div class="row">
+				<div class="fieldset"
+					ng-class="{'has-error':registerform.password.$invalid && !registerform.password.$pristine}">
+					<input type="password" name="password" id="password"
+						ng-model="password" class="form-control" placeholder="Password"
+						ng-minlength="5" ng-maxlength="8"
+						ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
+					<p ng-show="registerform.password.$error.required" class="error"></p>
+					<p ng-show="registerform.password.$error.minlength" class="error">
+						Passwords must be between 8 and 20 characters.</p>
+					<p ng-show="registerform.password.$error.pattern" class="error">
+						Must contain one lower &amp; uppercase letter, and one non-alpha
+						character (a number or a symbol.)</p>
+				</div>
+				<div class="login-help">
+
+					<input type="submit" value="Register"
+						class="btn btn-primary btn-lg"> <a href="#/login"
+						class="btn btn-link">Cancel</a>
+
+				</div>
+
+			</div>
 	</form>
 
 </div>

@@ -23,7 +23,7 @@ app.controller('RegisterController', [ '$rootScope','$scope','$http','$location'
 
 
 					$scope.smartmeter=result;
-
+					
 					$location.path('/app/registersucess');
 
 				} else {
@@ -31,10 +31,10 @@ app.controller('RegisterController', [ '$rootScope','$scope','$http','$location'
 					console.log('No householdID found');
 
 					if(result==='Unauthorized'){
-						$scope.error = 'Try to register again';
-						/*	$scope.name = 'smartmterid';
+						$scope.error = 'Try to manually Give SmartMeterID again';
+							$scope.name = 'smartmterid';
 	    					$scope.shouldBeDisabled = false;
-						 */
+						 
 
 					}
 
@@ -45,12 +45,11 @@ app.controller('RegisterController', [ '$rootScope','$scope','$http','$location'
 					$scope.email="";
 					$scope.householdid="";
 					$scope.password="";
-					$scope.confirmpassword="";
 					$scope.message = true;
 				}
 			})
 		}else {
-			register.message = "There are still invalid fields below";
+			$scope.error = "There are still invalid fields below";
 		}
 	}	
 
