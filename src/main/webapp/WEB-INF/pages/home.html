@@ -1,61 +1,89 @@
 <div ng-controller="HomeController as hmctrl">
 
-<div id="wrapper">
-	<div id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-			<li class="sidebar-brand"><a href="#"> Water Consumer Portal
-			</a></li>
-			<li>
-				<button ng-click="hmctrl.logout()" class="btn btn-primary" style="width:90%">Logout</button>
+	<div id="wrapper">
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand">Water Consumer Portal</li>
+				<li>
+					<button ng-click="hmctrl.logout()" class="btn btn-primary"
+						style="width: 90%">Logout</button>
 
-			</li>
-			<li><br></li>
-			<li><button  class="btn btn-primary" style="width:90%"> Home</button></li>
-			
-			<li>
-				 
-			<button ng-click="hmctrl.loadMapView()" class="btn btn-primary" style="width:90%">Map</button>
-			</li>
+				</li>
+				<li><br></li>
+				<li><button class="btn btn-primary" style="width: 90%">
+						Home</button></li>
 
-		</ul>
-	</div>
-	<div id="page-content-wrapper" >
-		<div class="container-fluid">
-			
-				
-										
-						<div class="col-lg-8">
-							<div class="media">
-								<div class="media-body">
-									<h4 class="media-heading">
-										{{username}}
-										<img src="resources/icons/individual.jpg" alt="Individual User" ng-show="individual">
-									<img src="resources/icons/common.jpg" alt="Common User" ng-show="common">
-									
-									</h4>
-									<p>
-									{{houseHoldId}}
-									{{smartMeterId}}
-									{{buildingId}}
-									{{consumptionType}}
-									{{zipcode}}
-									{{country}}
-									</p>
-									 <hr style="margin:8px auto">
-								</div>
-							</div>
+				<li>
 
-						</div>
+					<button ng-click="hmctrl.loadMapView()" class="btn btn-primary"
+						style="width: 90%">Map</button>
+				</li>
 
-						
-
-					
-					
-				</div>
-				<ng-include src="getPartial()"></ng-include>
-			
-			
+			</ul>
 		</div>
-	
+		<div id="page-content-wrapper">
+			<div class="container-fluid">
+
+
+<div class="twPc-div">
+				<div class="col-lg-8">
+					<div class="media">
+						<div class="media-body">
+							<h4 class="media-heading">
+								<img src="resources/icons/individual.jpg" alt="Individual User"
+									ng-show="individual"> <img
+									src="resources/icons/common.jpg" alt="Common User"
+									ng-show="common"> <b> {{username}} </b>
+							</h4>
+							
+							
+							<div class="twPc-divStats">
+								<ul class="twPc-Arrange">
+									<li class="twPc-ArrangeSizeFit"><span
+										class="twPc-StatLabel twPc-block">Household ID</span> <span
+										class="twPc-StatValue">{{houseHoldId}}</span></li>
+										
+										<li class="twPc-ArrangeSizeFit"><span
+										class="twPc-StatLabel twPc-block">Smartmeter ID</span> <span
+										class="twPc-StatValue">{{smartMeterId}}</span></li>
+										
+										<li class="twPc-ArrangeSizeFit"><span
+										class="twPc-StatLabel twPc-block">Building ID</span> <span
+										class="twPc-StatValue">{{buildingId}} </span></li>
+										
+										<li class="twPc-ArrangeSizeFit"><span
+										class="twPc-StatLabel twPc-block">Consumption Type</span> <span
+										class="twPc-StatValue">{{consumptionType}}</span></li>
+										
+										<li class="twPc-ArrangeSizeFit"><span
+										class="twPc-StatLabel twPc-block">Zip Code</span> <span
+										class="twPc-StatValue">{{zipcode}}</span></li>
+										
+										<li class="twPc-ArrangeSizeFit"><span
+										class="twPc-StatLabel twPc-block">Country</span> <span
+										class="twPc-StatValue">{{country}}</span></li>
+										
+								</ul>
+							</div>
+							
+							  
+							
+							
+							
+						</div>
+					</div>
+
+				</div>
 </div>
+
+
+
+
+			</div>
+			<ng-include src="getPartial()"></ng-include>
+
+
+		</div>
+
+	</div>
 </div>
