@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.wcp.model.User;
-
+import com.wcp.model.SmartMeter;
 @Service("loginService")
 @Transactional
 public class LoginService {
@@ -28,6 +28,7 @@ public class LoginService {
 
 		Integer userId = 0;
 		Integer houseHoldId = 0;
+		String smartMeterID="" ;
 		Map<String, String> map = new HashMap<>();
 
 		try {
@@ -84,6 +85,29 @@ public class LoginService {
 			map.put("userId", userId.toString());
 			map.put("houseHoldId", houseHoldId.toString());
 
+	//Check for smartmeterId
+
+			System.out.println("Check for smartMeterID");
+			String smartMeterCheck = "select smartMeterId from SmartMeter where (oid = (select smartMeter.oid from Household where oid=:householdOid))";
+			System.out.println(smartMeterCheck);
+			Query smartmetercheckquery = session.createQuery(smartMeterCheck);
+			query.setParameter("householdOid",houseHoldId);
+			List result1 = query.list();
+			System.out.println(result1);
+			System.out.println("resultset:" + result1);
+			Iterator iterator1 = result.iterator();
+			while (iterator1.hasNext()) {
+				smartMeterID = (String) iterator.next();
+			}
+			if (!smartMeterID.isEmpty()) {
+				map.put("smartmeterId",smartMeterID);
+			}else{
+				map.put("response","NoSmartMeterid");
+
+			}	
+			System.out.println(smartMeterID);
+
+			/////////////////////////////////////////////////////////////////////////////////////////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();
 

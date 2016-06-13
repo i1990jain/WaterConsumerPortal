@@ -36,12 +36,9 @@
 			<div class="row">
 				<input type="text" name="hosueholdID" id="householdid"
 					ng-model="householdid" class="form-control input-sm"
-					placeholder="HouseholdID" ng-pattern="/^[0-9]/" required> <span
+					placeholder="HouseholdID" ng-pattern="/^[0-9]/" required =""> <span
 					ng-show="registerform.householdid.$dirty && registerform.householdid.$error.required"
-					class="help-block">HouseholdId is required</span> <input
-					type="text" name="smartmterid" id="smartmterid"
-					ng-model="smartmeterid" ng-show="smartmeterid"
-					class="form-control" placeholder="SmartmeterID">
+					class="help-block">HouseholdId is required</span> 
 			</div>
 
 			<div class="row">
