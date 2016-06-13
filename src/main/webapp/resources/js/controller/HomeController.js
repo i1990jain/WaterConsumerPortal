@@ -1,11 +1,14 @@
 'use strict';
 
-app.controller('HomeController', [ '$scope','$http','$location','AuthenticationService','$localStorage','$route','$document',	function($scope,$http,$location,AuthenticationService,$localStorage,$route,$document) {
+app.controller('HomeController', [ '$rootScope','$scope','$http','$location','AuthenticationService','$localStorage','$route','$document',	function($rootScope,$scope,$http,$location,AuthenticationService,$localStorage,$route,$document) {
 	var user = this;
 
 	user.logout = logout;
 	user.loadMapView=loadMapView;
-	user.loadHome=loadHome;
+	
+	$rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
+		$rootScope.animation = currRoute.animation;
+	  });
 
 	$scope.username=$localStorage.currentUser.username;
 
@@ -21,19 +24,13 @@ app.controller('HomeController', [ '$scope','$http','$location','AuthenticationS
 		$location.path('/app/mapview');
 	}
 
-	function loadHome() {
-		$localStorage.currentUser.pagetoken="1";
-		
-		$location.path('/app/home');
-	}
+	
 
 	$document.ready(function () {
 
 		
 		if($localStorage.currentUser.pagetoken=== "2"){
 			$localStorage.currentUser.pagetoken="1";
-		}else if($localStorage.currentUser.pagetoken=== "1"){
-			$localStorage.currentUser.pagetoken="2";
 		}else if($localStorage.currentUser.pagetoken=== ""){
 			$localStorage.currentUser.pagetoken="1";
 		}
@@ -49,6 +46,13 @@ app.controller('HomeController', [ '$scope','$http','$location','AuthenticationS
 			$scope.smartMeterId=response.result.smartMeterId;
 			$scope.buildingId=response.result.buildingId;
 			$scope.consumptionType=response.result.consumptionType;
+			if($scope.consumptionType==="individual"){
+				$scope.individual = true;
+				$scope.common = false;
+			}else{
+				$scope.individual = false;
+				$scope.common = true;
+			}
 			$scope.zipcode=response.result.zipcode;
 			$localStorage.currentUser.zipcode=response.result.zipcode;
 			$scope.country=response.result.country;

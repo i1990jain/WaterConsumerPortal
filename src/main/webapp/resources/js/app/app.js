@@ -23,8 +23,9 @@ app.config(function ($routeProvider) {
 					templateUrl: 'app/register',
 					animation: 'second'	})
 					.when('/app/mapview',
-							{controller: 'HomeController',
-						templateUrl: 'app/mapview'
+							{controller: 'MapViewController',
+						templateUrl: 'app/mapview',
+						animation: 'second'
 							})
 							.when('/app/registersuccess',
 									{templateUrl: 'app/registersuccess',
