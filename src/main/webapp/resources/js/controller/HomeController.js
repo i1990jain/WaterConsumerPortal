@@ -5,10 +5,10 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 
 	user.logout = logout;
 	user.loadMapView=loadMapView;
-	
+
 	$rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
 		$rootScope.animation = currRoute.animation;
-	  });
+	});
 
 	$scope.username=$localStorage.currentUser.username;
 
@@ -20,20 +20,18 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 
 	function loadMapView() {
 		$localStorage.currentUser.pagetoken="2";
-		
+
 		$location.path('/app/mapview');
 	}
 
-	
+
 
 	$document.ready(function () {
 
-		
-		if($localStorage.currentUser.pagetoken=== "2"){
-			$localStorage.currentUser.pagetoken="1";
-		}else if($localStorage.currentUser.pagetoken=== ""){
-			$localStorage.currentUser.pagetoken="1";
-		}
+
+
+		$localStorage.currentUser.pagetoken="1";
+
 
 		var token=$localStorage.currentUser.token;
 		var data = {

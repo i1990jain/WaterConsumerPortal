@@ -19,9 +19,16 @@ app.controller('MapViewController', [ '$rootScope','$scope','$http','$location',
 	}
 	
 	$document.ready(function () {
-		if($localStorage.currentUser.pagetoken=== "1"){
+		
 			$localStorage.currentUser.pagetoken="2";
-		}
+		
+		
+		var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: 44.540, lng: -78.546},
+          zoom: 8
+        });
+		
 	});
 	
 	function logout() {

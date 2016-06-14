@@ -186,3 +186,8 @@ ul.twPc-Arrange {
     text-transform: uppercase;
     transition: color 0.15s ease-in-out 0s;
 }
+
+ #map {
+        width: 1080px;
+        height: 500px;
+      }
