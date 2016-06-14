@@ -41,4 +41,9 @@ public class PageTemplateController {
 		System.out.println("Loading mapview page");
 		return "pages/mapview";
 	}
+	@RequestMapping("/nonregistereduserpage")
+	public String nonregistereduserpage() {
+		System.out.println("Loading nonregistereduserpage page");
+		return "pages/nonregistereduserpage";
+	}
 }

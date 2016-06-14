@@ -50,6 +50,11 @@ public class LoginController {
 
 			map.put("username", user.getUsername());
 			map.put("token", resultMap.get("userId"));
+			if(!resultMap.get("response").equals("SmartMeterIDFound")){
+				map.put("response",resultMap.get("response"));	
+			}else{
+				map.put("response",resultMap.get("response"));
+			}
 
 			return new ResponseEntity<>(map, HttpStatus.OK);
 		} else if (!resultMap.get("userId").toString().equals("0")

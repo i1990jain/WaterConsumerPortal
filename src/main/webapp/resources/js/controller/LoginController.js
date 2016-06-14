@@ -16,8 +16,18 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
     function login() {
 		
     AuthenticationService.Login($scope.username, $scope.password, function (result) {
-        if (result === true) {
-            $location.path('/app/home');
+    	console.log(result);
+        if (result === 'SmartMeterIDFound') {
+        	console.log("i got in");
+        	//if(result === '1'){
+        		console.log("smartmeterid  found");
+        		$location.path('/app/home');	
+        //	}
+        }else if(result === 'NoSmartMeterIDFound'){
+        		console.log("smartmeterid not found");
+        		$location.path('/app/home');
+        //	}
+            
             
         } else {
         	console.log(result);  

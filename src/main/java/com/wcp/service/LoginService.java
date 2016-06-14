@@ -28,7 +28,7 @@ public class LoginService {
 
 		Integer userId = 0;
 		Integer houseHoldId = 0;
-		String smartMeterID="" ;
+		String smartMeterId="" ;
 		Map<String, String> map = new HashMap<>();
 
 		try {
@@ -81,7 +81,7 @@ public class LoginService {
 				 * } }
 				 */
 			}
-
+			System.out.println(houseHoldId);
 			map.put("userId", userId.toString());
 			map.put("houseHoldId", houseHoldId.toString());
 
@@ -91,21 +91,21 @@ public class LoginService {
 			String smartMeterCheck = "select smartMeterId from SmartMeter where (oid = (select smartMeter.oid from Household where oid=:householdOid))";
 			System.out.println(smartMeterCheck);
 			Query smartmetercheckquery = session.createQuery(smartMeterCheck);
-			query.setParameter("householdOid",houseHoldId);
-			List result1 = query.list();
+			smartmetercheckquery.setParameter("householdOid",houseHoldId);
+			List result1 = smartmetercheckquery.list();
 			System.out.println(result1);
 			System.out.println("resultset:" + result1);
-			Iterator iterator1 = result.iterator();
+			Iterator iterator1 = result1.iterator();
 			while (iterator1.hasNext()) {
-				smartMeterID = (String) iterator.next();
+				smartMeterId = (String) iterator1.next();
 			}
-			if (!smartMeterID.isEmpty()) {
-				map.put("smartmeterId",smartMeterID);
+			if (!smartMeterId.isEmpty()) {
+				map.put("response","SmartMeterIDFound");
 			}else{
-				map.put("response","NoSmartMeterid");
+				map.put("response","NoSmartMeterIDFound");
 
 			}	
-			System.out.println(smartMeterID);
+			System.out.println(smartMeterId);
 
 			/////////////////////////////////////////////////////////////////////////////////////////////////////////
 		} catch (Exception e) {

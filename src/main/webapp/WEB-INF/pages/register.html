@@ -25,7 +25,7 @@
 			<div class="row">
 				<input type="text" name="username" id="username" ng-model="username"
 					class="form-control" placeholder="User Name" ng-minlength="3"
-					ng-maxlength="8" ng-pattern="/^[A-Za-z]*$/" required> <span
+					ng-maxlength="8" ng-pattern="/^[A-Za-z0-9]*$/" required> <span
 					ng-show="registerform.username.$error.minlength" class="help-block">Username
 					is too short.</span> <span
 					ng-show="registerform.username.$error.maxlength" class="help-block">Username

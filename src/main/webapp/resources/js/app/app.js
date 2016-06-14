@@ -30,6 +30,10 @@ app.config(function ($routeProvider) {
 							.when('/app/registersuccess',
 									{templateUrl: 'app/registersuccess',
 								animation: 'second'})
+								.when('/app/nonregistereduserpage',
+									{controller: 'MapViewController',
+									templateUrl: 'app/nonregistereduserpage',
+								animation: 'second'})
 								.otherwise('/app/login');
 
 
@@ -52,6 +56,10 @@ app.run(function ($rootScope, $http, $location, $localStorage,$window) {
 				$location.path('/app/home');
 				
 			}
+			/*if($localStorage.currentUser.pagetoken=== "3"){
+				$location.path('/app/nonregistereduserpage');
+				
+			}*/
 			$http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
 		}
 
