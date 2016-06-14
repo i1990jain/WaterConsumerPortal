@@ -40,7 +40,7 @@
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+    
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -127,16 +127,26 @@
 }
 
 .twPc-div {
-    background: #fff none repeat scroll 0 0;
-    border: 1px solid #e1e8ed;
+    background: #FCFCFC none repeat scroll 0 0;
+    border: 2px solid #e1e8ed;
     border-radius: 6px;
     height: 100px;
-    max-width: 1200px; 
+   
 }
+
+.twCo-div {
+    background: #FCFCFC none repeat scroll 0 0;
+    border: 2px solid #e1e8ed;
+    border-radius: 10px;
+    height: 500px;
+    padding: 10;
+}
+
+
 
 .twPc-divStats {
     margin-left: 11px;
-    padding: 10px 0;
+    /* padding: 10px 0; */
 }
 
 .twPc-Arrange {
