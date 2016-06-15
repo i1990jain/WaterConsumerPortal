@@ -42,10 +42,15 @@ app.controller('MapViewController', [ '$rootScope','$scope','$http','$location',
                     position: results[0].geometry.location
                 });
             	
-                 latitude = results[0].geometry.location.lat();
-                location= results[0].geometry.location;
-                 longitude = results[0].geometry.location.lng();
-                console.log("Latitude: " + latitude + "\nLongitude: " + longitude);
+                var infowindow = new google.maps.InfoWindow({
+                    content: '<p>Marker Location:' + marker.getPosition() + '</p>'
+                  });
+
+                  google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.open(map, marker);
+                  });
+                  
+                  
             } else {
                 alert("Request failed.")
             }
