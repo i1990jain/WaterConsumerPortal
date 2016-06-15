@@ -51,9 +51,23 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 				$scope.individual = false;
 				$scope.common = true;
 			}
-			$scope.zipcode=response.result.zipcode;
+			
+			if(response.result.zipcode===''){
+				$scope.zipcode="-";
+			}else{
+				$scope.zipcode=response.result.zipcode;
+				
+			}
+			
+			if(response.result.country===''){
+				$scope.country="-";
+			}else{
+				$scope.country=response.result.country;
+				
+			}
+			
 			$localStorage.currentUser.zipcode=response.result.zipcode;
-			$scope.country=response.result.country;
+			
 		});
 	});
 
