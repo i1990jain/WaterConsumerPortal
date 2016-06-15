@@ -65,7 +65,7 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 				$scope.country=response.result.country;
 				
 			}
-			
+			$localStorage.currentUser.country=response.result.country;
 			$localStorage.currentUser.zipcode=response.result.zipcode;
 			
 		});

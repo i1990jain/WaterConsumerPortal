@@ -18,16 +18,41 @@ app.controller('MapViewController', [ '$rootScope','$scope','$http','$location',
 		$location.path('/app/home');
 	}
 	
+	
 	$document.ready(function () {
 		
-			$localStorage.currentUser.pagetoken="2";
-		
-		
-		var mapDiv = document.getElementById('map');
-        var map = new google.maps.Map(mapDiv, {
-          center: {lat: 44.540, lng: -78.546},
-          zoom: 8
+		$localStorage.currentUser.pagetoken="2";
+		var map;
+		var latitude;
+		var longitude;
+		var location;
+		var geocoder= new google.maps.Geocoder();
+		var address = $localStorage.currentUser.zipcode+","+$localStorage.currentUser.country;
+		geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+            	var myOptions = {
+                        zoom: 12,
+                        center: results[0].geometry.location,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    }
+            	map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            	
+                 latitude = results[0].geometry.location.lat();
+                location= results[0].geometry.location;
+                 longitude = results[0].geometry.location.lng();
+                console.log("Latitude: " + latitude + "\nLongitude: " + longitude);
+            } else {
+                alert("Request failed.")
+            }
         });
+		
+			
+		
 		
 	});
 	
