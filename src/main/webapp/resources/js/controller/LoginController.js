@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('LoginController', [ '$rootScope','$scope','$http','$location','AuthenticationService',	function($rootScope,$scope,$http,$location,AuthenticationService) {
+app.controller('LoginController', [ '$rootScope','$scope','$http','$location','AuthenticationService','$localStorage','$document',	function($rootScope,$scope,$http,$location,AuthenticationService,$localStorage,$document) {
 	var user = this;
 	
     user.login = login;
@@ -12,6 +12,8 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
 		$rootScope.animation = currRoute.animation;
 	  });
     
+    
+  
     
     function login() {
 		
@@ -48,4 +50,15 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
     function register() {
     	 $location.path('/app/register');
     }
+    
+  $document.ready(function () {
+	  if($localStorage.success){
+    	if($localStorage.success.result==="yes"){
+    		$scope.regSuccessMsg="Registration Success!";
+    		$scope.regSuccess=true;
+    		delete $localStorage.success;
+    	}
+	  }
+	  
+    });
 }]);

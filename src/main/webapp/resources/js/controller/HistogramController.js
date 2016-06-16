@@ -291,8 +291,10 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 
 			$localStorage.currentUser.daily=dailyavg;
 			var weeklyavg=dailyavg*7;
+			weeklyavg=weeklyavg.toFixed(2);
 			$localStorage.currentUser.weekly=weeklyavg;
 			var monthlyavg=dailyavg*30;
+			monthlyavg=monthlyavg.toFixed(2);
 			$localStorage.currentUser.monthly=monthlyavg;
 
 			

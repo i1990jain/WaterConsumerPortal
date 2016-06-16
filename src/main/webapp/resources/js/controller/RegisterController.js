@@ -1,7 +1,7 @@
 
 'use strict';
 
-app.controller('RegisterController', [ '$rootScope','$scope','$http','$location','RegisterService',	function($rootScope,$scope,$http,$location,RegisterService) {
+app.controller('RegisterController', [ '$rootScope','$scope','$http','$location','RegisterService','$localStorage',	function($rootScope,$scope,$http,$location,RegisterService,$localStorage) {
 
 	var vm = this;
 	vm.register = register;
@@ -10,14 +10,16 @@ app.controller('RegisterController', [ '$rootScope','$scope','$http','$location'
 		$rootScope.animation = currRoute.animation;
 	});
 
-	function register(isValid) {
+	function register() {
 		console.log($scope.firstname,$scope.lastname,$scope.username,$scope.zipcode,$scope.householdid,$scope.email,$scope.password)
 
 
-		if (isValid) {
+		
 			RegisterService.register($scope.firstname,$scope.lastname,$scope.username,$scope.zipcode,$scope.householdid,$scope.email,$scope.password, function (result) {
 				if (result === true) {
-					$location.path('/app/registersuccess');
+					
+					$localStorage.success={result:"yes"};
+					$location.path('/app/login');
 
 				} else {
 					console.log(result);  
@@ -33,10 +35,7 @@ app.controller('RegisterController', [ '$rootScope','$scope','$http','$location'
 					$scope.message = true;
 				}
 			})
-		}else {
-			$scope.message = true;
-			$scope.error = "There are still invalid fields below";
-		}
+		
 	}	
 
 }])   

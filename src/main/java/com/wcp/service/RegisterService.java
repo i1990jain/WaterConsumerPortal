@@ -1,6 +1,5 @@
 package com.wcp.service;
 
-
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,16 +9,14 @@ import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.wcp.datamodel.RegisterData;
 import com.wcp.model.Household;
 import com.wcp.model.NeutralUser;
 import com.wcp.model.User;
-import com.wcp.datamodel.RegisterData;
 
 @Service("registerService")
 @Transactional
@@ -32,8 +29,8 @@ public class RegisterService {
 
 		Session session = sessionFactory.openSession();
 
-		String smartMeterID="" ;
-		int householdid=0;
+		String smartMeterID = "";
+		int householdid = 0;
 		int a = 1;
 		Map<String, String> map = new HashMap<>();
 
@@ -44,15 +41,14 @@ public class RegisterService {
 			System.out.println("User Name :" + registerdata.getUserName());
 			System.out.println("First Name :" + registerdata.getFirstName());
 			System.out.println("Last Name: " + registerdata.getLastName());
-			System.out.println("HouseholdID : "+ registerdata.getHouseholdID());
-			System.out.println("ZipCode : "+ registerdata.getZipCode());
-			System.out.println("Password : "+ registerdata.getPassword());
+			System.out.println("HouseholdID : " + registerdata.getHouseholdID());
+			System.out.println("ZipCode : " + registerdata.getZipCode());
+			System.out.println("Password : " + registerdata.getPassword());
 
-			if((registerdata.getHouseholdID()!=0)){
-				//Check for Household Id is valid or not
+			if ((registerdata.getHouseholdID() != 0)) {
+				// Check for Household Id is valid or not
 				String householdidcheck = "select oid from Household";
 				System.out.println(householdidcheck);
-
 
 				Query householdcheckquery = session.createQuery(householdidcheck);
 				List householdresult = householdcheckquery.list();
@@ -62,18 +58,19 @@ public class RegisterService {
 				Iterator iterator = householdresult.iterator();
 				while (iterator.hasNext()) {
 					householdid = (Integer) iterator.next();
-					if(householdid==registerdata.getHouseholdID()){
-						a=0;
+					if (householdid == registerdata.getHouseholdID()) {
+						a = 0;
 						break;
-					}else{
-						a=1;
+					} else {
+						a = 1;
 					}
 				}
-				//if householdid is valid register User
 
-				if(a==0){
+				// if householdid is valid register User
+
+				if (a == 0) {
 					int oid = 0;
-					String selectoid ="SELECT oid FROM User ORDER BY oid DESC";
+					String selectoid = "SELECT oid FROM User ORDER BY oid DESC";
 					System.out.println(selectoid);
 					Query selectoidquery = session.createQuery(selectoid);
 					selectoidquery.setMaxResults(1);
@@ -84,9 +81,9 @@ public class RegisterService {
 					while (iterator2.hasNext()) {
 						oid = (Integer) iterator2.next();
 					}
-					oid =oid+1;
+					oid = oid + 1;
 					System.out.println(oid);
-					User user=new User();
+					User user = new User();
 					NeutralUser neutraluser = new NeutralUser();
 					Household houseHold = new Household();
 					houseHold.setOid(registerdata.getHouseholdID());
@@ -101,26 +98,23 @@ public class RegisterService {
 					neutraluser.setUser(user);
 					neutraluser.setHousehold(houseHold);
 					session.save(neutraluser);
-					//Commit the transaction
+					// Commit the transaction
 					session.getTransaction().commit();
 
 					System.out.println("Insert completed");
 
 					map.put("response", "Authorized");
 
-
-				}else{
+				} else {
 					map.put("response", "Unauthorized");
 					session.flush();
 
-
 				}
 
-			}else{
-				map.put("repsonse","No HouseholdId found");
+			} else {
+				map.put("repsonse", "No HouseholdId found");
 				map.put("response", "Unauthorized");
 			}
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -131,4 +125,3 @@ public class RegisterService {
 		return map;
 	}
 }
-

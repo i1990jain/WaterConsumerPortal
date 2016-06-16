@@ -1,8 +1,8 @@
 <div class="generic-container"
 	ng-controller="RegisterController as ctrl">
 
-	<form class="form-signin" name="registerform" novalidate
-		ng-submit="ctrl.register(registerform.$valid)">
+	<form class="form-signin" name="registerform" 
+		ng-submit="ctrl.register()">
 
 		<div class="registermodal-container">
 
@@ -12,7 +12,7 @@
 			<div class="row">
 				<input type="text" name="firstname" id="firstname"
 					ng-model="firstname" class="form-control" placeholder="First Name"
-					ng-pattern="/^[A-Za-z]*$/" required> <span
+					ng-pattern="/^[A-Za-z]*$/" required=""> <span
 					ng-show="registerform.firstname.$dirty && registerform.firstname.$error.pattern"
 					class="help-block">Must contain only Alphabet</span> <input
 					type="text" name="lastname" id="lastname" ng-model="lastname"
