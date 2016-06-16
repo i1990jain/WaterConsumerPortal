@@ -296,7 +296,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			$localStorage.currentUser.monthly=monthlyavg;
 
 			
-			$scope.toggleLoading();
+			
 			
 			var zipcode=$localStorage.currentUser.zipcode;
 			var date=lastUpdateDate;
@@ -311,6 +311,8 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			.success(function (response) {
 				neighbourAvg=response.result;
 				neighbourAvg=neighbourAvg.toFixed(2);
+				$scope.optionsDiv=true;	
+				$scope.toggleLoading();
 			});
 			
 			
