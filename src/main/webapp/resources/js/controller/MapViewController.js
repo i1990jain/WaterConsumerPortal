@@ -51,8 +51,8 @@ app.controller('MapViewController', [ '$rootScope','$scope','$http','$location',
             	
                 var infowindow = new google.maps.InfoWindow({
                     content: '<p>' +$localStorage.currentUser.zipcode + ","+$localStorage.currentUser.country+'</p><br>'
-                    +'<p><b>Total: </b>' +$localStorage.currentUser.total + " [m\u00B3]<br> <b>Daily:</b>"+$localStorage.currentUser.daily+' [m\u00B3]<br>'
-                    +'<b>Weekly: </b>' +$localStorage.currentUser.weekly + " [m\u00B3]<br><b> Monthly:</b>"+$localStorage.currentUser.monthly+' [m\u00B3]<br></p>'
+                    +'<p><b>Total: </b> ' +$localStorage.currentUser.total + " [m\u00B3]<br> <b>Daily:</b> "+$localStorage.currentUser.daily+' [m\u00B3]<br>'
+                    +'<b>Weekly: </b> ' +$localStorage.currentUser.weekly + " [m\u00B3]<br><b> Monthly:</b> "+$localStorage.currentUser.monthly+' [m\u00B3]<br></p>'
                     
                   });
 

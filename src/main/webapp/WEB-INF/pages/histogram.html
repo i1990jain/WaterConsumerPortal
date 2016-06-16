@@ -1,48 +1,44 @@
 
 
-<div  ng-controller="HistogramController" >
+<div ng-controller="HistogramController">
 
 
 	<div align="left">
 		Data updated on: <b> {{lastUpdate}}</b><br>
 
-		
-	</div>
-	<br/>
-	<p>
-	
-	<input
-	
-    type="checkbox"
-    ng-model="userAveragebox"
-    ng-change="userAverage(userAveragebox)">
-    </input>your daily average
-    
-   
-	<input
-	
-    type="checkbox"
-    ng-model="neighbourhoodAveragebox"
-    ng-change="neighbourhoodAverage(neighbourhoodAveragebox)"></input>
-     neighbourhood average
-		</p>
-		
-	<!-- 	<p>
-	
-		</p>
-		 -->
-	<div align="right">
 
-		<p>
-			<b>Display Consumption for</b>
-			
-			
-			 <select class="selectpicker" ng-init="chartType = types[0]"
-				ng-options="type as type.name for type in types "
-				ng-model="chartType" ng-change="chartTypeChange()"></select>
-		</p>
 	</div>
-	
+	<br />
+	<div class="row">
+		<div class="container">
+			<div class="col-md-4">
+				<label for="inputType">your daily average</label> <input
+					type="checkbox" ng-model="userAveragebox"
+					ng-change="userAverage(userAveragebox)"> </input> <label
+					for="inputType"> neighbourhood average</label> <input
+					type="checkbox" ng-model="neighbourhoodAveragebox"
+					ng-change="neighbourhoodAverage(neighbourhoodAveragebox)"></input>
+
+
+			</div>
+
+			<div class="col-md-3 col-md-offset-4">
+
+				<div class="pull-right">
+					<label for="inputType"> <b>Display Consumption for</b>
+					</label> 
+					
+					<select class="form-control" ng-init="chartType = types[0]"
+						ng-options="type as type.name for type in types "
+						ng-model="chartType" ng-change="chartTypeChange()"></select>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<highchart id="chart" config="chartConfig" class="span10"></highchart>
 	<div id="popupContainer"></div>
 </div>
