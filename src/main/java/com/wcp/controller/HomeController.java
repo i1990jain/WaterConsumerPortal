@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.wcp.datamodel.DistrictData;
 import com.wcp.datamodel.ReadingData;
 import com.wcp.datamodel.UserData;
-import com.wcp.model.District;
 import com.wcp.model.User;
 import com.wcp.service.DatabaseService;
 import com.wcp.service.HistogramService;
@@ -69,10 +69,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/nbhavg", method = RequestMethod.POST)
 	@Produces({ MediaType.APPLICATION_JSON })
-	public ResponseEntity<Map<String, Object>> nbhAverage(@RequestBody District district)
+	public ResponseEntity<Map<String, Object>> nbhAverage(@RequestBody DistrictData districtData)
 			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
 		Map<String, Object> map = new HashMap<>();
-		Double result = databaseService.averageComsumption(district.getZipcode());
+		Double result = databaseService.averageComsumption(districtData.getZipcode(), districtData.getDate());
 
 		map.put("result", result);
 

@@ -5,17 +5,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 	var chartdata=[];
 	var neighbourAvg;
 
-	$scope.getNeighbourhoodAverage = function () {
-		var zipcode=$localStorage.currentUser.zipcode;
-		var data = {
-				zipcode : zipcode
-		};
-
-		$http.post('nbhavg/', data)
-		.success(function (response) {
-			neighbourAvg=response.result;
-		});
-	}
+	
 
 	$scope.toggleLoading = function () {
 		this.chartConfig.loading = !this.chartConfig.loading
@@ -24,7 +14,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 	$scope.neighbourhoodAveragebox=false;
 	$scope.neighbourhoodAverage = function (neighbourhoodAveragebox) {
 		if($scope.neighbourhoodAveragebox){ 
-
+			
 			this.chartConfig.yAxis.plotLines=[{
 				color: 'red',
 				value: neighbourAvg,
@@ -175,6 +165,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 	}
 
 	$document.ready(function () {
+		var lastUpdateDate;
 		Highcharts.setOptions({
 			global: {
 				useUTC: false
@@ -255,7 +246,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 
 			chartdata.sort();
 
-			var lastUpdateDate = new Date(array[j-1].readingDateTime);
+			 lastUpdateDate = new Date(array[j-1].readingDateTime);
 
 			$scope.lastUpdate= lastUpdateDate.toDateString();
 
@@ -305,13 +296,27 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			$localStorage.currentUser.monthly=monthlyavg;
 
 			
-
-
 			$scope.toggleLoading();
+			
+			var zipcode=$localStorage.currentUser.zipcode;
+			var date=lastUpdateDate;
+			console.log(lastUpdateDate);
+			var data = {
+					zipcode : zipcode,
+					date : date
+					
+			};
+
+			$http.post('nbhavg/', data)
+			.success(function (response) {
+				neighbourAvg=response.result;
+				neighbourAvg=neighbourAvg.toFixed(2);
+			});
+			
+			
 		});
 
-		//$scope.getNeighbourhoodAverage();
-		//calculate averages
+		
 		
 
 	});

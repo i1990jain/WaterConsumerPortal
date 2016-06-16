@@ -9,6 +9,7 @@ com\wcp\model\DeviceType.class
 com\wcp\model\Household.class
 com\wcp\model\DeviceConsumption.class
 com\wcp\datamodel\ReadingData.class
+com\wcp\datamodel\DistrictData.class
 com\wcp\model\NeutralUser.class
 com\wcp\controller\HomeController.class
 com\wcp\model\SmartMeter.class

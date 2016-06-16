@@ -3,6 +3,7 @@ package com.wcp.service;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class DatabaseService {
 
 	//////////// Average Consumption of the user and Average Consumption of the
 
-	public Double averageComsumption(String zipcode)
+	public Double averageComsumption(String zipcode, Date date)
 			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
 		Double nbhAverage = 0.0;
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -42,18 +43,31 @@ public class DatabaseService {
 
 			Query neighSmartmetersQuery = session.createQuery(neighSmartmeters);
 			neighSmartmetersQuery.setParameter("zipcode", zipcode);
+			neighSmartmetersQuery.setMaxResults(5);
 			result = neighSmartmetersQuery.list();
 
 			for (Object id : result) {
 				List<ReadingData> dailyreadingDataList = new ArrayList<ReadingData>();
 				List<ReadingData> perDayDataList = new ArrayList<ReadingData>();
-				String consumptionData = "from MeterReading m where smart_meter_oid =:smartMeterId ORDER BY m.readingDateTime";
+				String consumptionData = "from MeterReading m where smart_meter_oid =:smartMeterId and m.readingDateTime>=:startDate and m.readingDateTime<:endDate ORDER BY m.readingDateTime";
 
 				Query query = session.createQuery(consumptionData);
 
-				query.setParameter("smartMeterId", id);
+				Date dtMinusOne = new Date();
+				Calendar c = Calendar.getInstance();
+				c.setTime(date);
 
+				c.add(Calendar.DATE, -1);
+				dtMinusOne = c.getTime();
+
+				System.out.println(date);
+				System.out.println(dtMinusOne);
+
+				query.setParameter("smartMeterId", id);
+				query.setTimestamp("startDate", dtMinusOne);
+				query.setTimestamp("endDate", date);
 				List perDayresult = query.list();
+
 				if (!perDayresult.isEmpty()) {
 					dailyreadingDataList = getReadingData(perDayresult);
 
