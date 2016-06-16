@@ -37,13 +37,23 @@ app.controller('MapViewController', [ '$rootScope','$scope','$http','$location',
                     }
             	map = new google.maps.Map(document.getElementById("map"), myOptions);
 
+            	var image;
+            	if($localStorage.currentUser.usertype==="individual"){
+            	 image = 'resources/icons/individual.jpg';
+            	}else{
+            	 image = 'resources/icons/common.jpg'; 
+            	}
                 var marker = new google.maps.Marker({
                     map: map,
+                    icon: image,
                     position: results[0].geometry.location
                 });
             	
                 var infowindow = new google.maps.InfoWindow({
-                    content: '<p>Marker Location:' + marker.getPosition() + '</p>'
+                    content: '<p>' +$localStorage.currentUser.zipcode + ","+$localStorage.currentUser.country+'</p><br>'
+                    +'<p><b>Total: </b>' +$localStorage.currentUser.total + " [m\u00B3]<br> <b>Daily:</b>"+$localStorage.currentUser.daily+' [m\u00B3]<br>'
+                    +'<b>Weekly: </b>' +$localStorage.currentUser.weekly + " [m\u00B3]<br><b> Monthly:</b>"+$localStorage.currentUser.monthly+' [m\u00B3]<br></p>'
+                    
                   });
 
                   google.maps.event.addListener(marker, 'click', function() {

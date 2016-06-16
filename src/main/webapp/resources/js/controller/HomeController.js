@@ -45,9 +45,11 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 			$scope.buildingId=response.result.buildingId;
 			$scope.consumptionType=response.result.consumptionType;
 			if($scope.consumptionType==="individual"){
+				$localStorage.currentUser.usertype="individual";
 				$scope.individual = true;
 				$scope.common = false;
 			}else{
+				$localStorage.currentUser.usertype="common";
 				$scope.individual = false;
 				$scope.common = true;
 			}
