@@ -19,19 +19,20 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
 		
     AuthenticationService.Login($scope.username, $scope.password, function (result) {
     	console.log(result);
-        if (result === 'SmartMeterIDFound') {
-        	console.log("i got in");
-        	//if(result === '1'){
-        		console.log("smartmeterid  found");
-        		$location.path('/app/home');	
-        //	}
-        }else if(result === 'NoSmartMeterIDFound'){
-        		console.log("smartmeterid not found");
-        		$location.path('/app/home');
-        //	}
-            
-            
-        } else {
+    	if(result===true){
+    	/*	if (result.response === 'MeteredUserFound') {
+            	console.log("i got in");
+           		console.log("meteredUser found");
+            		$location.path('/app/home');	
+           
+            }else if(result.response === 'Non-MeteredUserFound'){
+            		console.log("Non-meteredUser found");
+            		$location.path('/app/home');
+            }else{*/
+            	$location.path('/app/home');
+           // }
+                           
+        } else if(result===false) {
         	console.log(result);  
         	console.log('invalid user');
         	

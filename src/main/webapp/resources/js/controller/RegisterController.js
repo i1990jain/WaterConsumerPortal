@@ -11,22 +11,22 @@ app.controller('RegisterController', [ '$rootScope','$scope','$http','$location'
 	});
 
 	function register() {
-		console.log($scope.firstname,$scope.lastname,$scope.username,$scope.zipcode,$scope.householdid,$scope.email,$scope.password)
+		console.log($scope.firstname,$scope.lastname,$scope.username,$scope.zipcode,$scope.householdid,$scope.registerform.value1,$scope.email,$scope.password,$scope.password)
 
 
 		
-			RegisterService.register($scope.firstname,$scope.lastname,$scope.username,$scope.zipcode,$scope.householdid,$scope.email,$scope.password, function (result) {
+			RegisterService.register($scope.firstname,$scope.lastname,$scope.username,$scope.zipcode,$scope.householdid,$scope.registerform.value1,$scope.email,$scope.password, function (result) {
+				console.log(result);
 				if (result === true) {
 					
 					$localStorage.success={result:"yes"};
 					$location.path('/app/login');
 
 				} else {
-					console.log(result);  
+					if(result.response==='Unauthorized'){
 
-					if(result==='Unauthorized'){
-
-						$scope.error = 'InValid houseHoldID';
+					
+						$scope.error = result.errormsg;
 					}
 
 					

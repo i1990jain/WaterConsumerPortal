@@ -9,6 +9,8 @@ public class RegisterData implements java.io.Serializable {
 	private int householdID;
 	private String email;
 	private String password;
+	private boolean smartmeter;
+	
 	private String smartmeterid;
 
 	public String getFirstName() {
@@ -61,5 +63,10 @@ public class RegisterData implements java.io.Serializable {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
+	public boolean isSmartmeter() {
+		return smartmeter;
+	}
+	public void setSmartmeter(boolean smartmeter) {
+		this.smartmeter = smartmeter;
+	}
 }

@@ -29,13 +29,15 @@
                         $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
 
                         // execute callback with true to indicate successful login
-                        callback(response.response);
+                        callback(true);
+                        callback(response);
                     } else {
                         // execute callback with false to indicate failed login
                         callback(false);
                     }
                 }).error(function(response){
-                	callback(response.response);
+                	 callback(false);
+                	callback(response);
                                      
                 });
         }

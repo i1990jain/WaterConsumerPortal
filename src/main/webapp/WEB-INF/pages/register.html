@@ -1,7 +1,7 @@
 <div class="generic-container"
 	ng-controller="RegisterController as ctrl">
 
-	<form class="form-signin" name="registerform" 
+	<form class="form-signin" name="registerform"
 		ng-submit="ctrl.register()">
 
 		<div class="registermodal-container">
@@ -36,9 +36,15 @@
 			<div class="row">
 				<input type="text" name="hosueholdID" id="householdid"
 					ng-model="householdid" class="form-control input-sm"
-					placeholder="HouseholdID" ng-pattern="/^[0-9]/" required =""> <span
+					placeholder="HouseholdID" ng-pattern="/^[0-9]/" required="">
+				<span
 					ng-show="registerform.householdid.$dirty && registerform.householdid.$error.required"
-					class="help-block">HouseholdId is required</span> 
+					class="help-block">HouseholdId is required</span>
+			</div>
+			<div clas="row">
+				<label>Non-Metered User: <input type="checkbox"
+					ng-model="registerform.value1">
+				</label><br />
 			</div>
 
 			<div class="row">

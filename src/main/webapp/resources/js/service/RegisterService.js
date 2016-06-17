@@ -10,7 +10,7 @@
 
 		return service;
 
-		function register(firstname,lastname,username,zipcode,householdid,email,password,callback) {
+		function register(firstname,lastname,username,zipcode,householdid,smartmeter,email,password,callback) {
 			console.log("I am here");
 			var data = {
 					firstName: firstname,
@@ -18,6 +18,7 @@
 					userName : username,
 					zipCode: zipcode,
 					householdID: householdid,
+					smartmeter:smartmeter,
 					email: email,  				
 					password : password
 
@@ -27,6 +28,7 @@
 					username,
 					zipcode,
 					householdid,
+					smartmeter,
 					email,  				
 					password
 			);
@@ -37,8 +39,10 @@
 					callback(true);
 									
 			}).error(function(response){
+				console.log(response.response);
+				console.log(response.errormsg);
 				callback(false);
-				callback(response.response);
+				callback(response);
 
 			});
 		}

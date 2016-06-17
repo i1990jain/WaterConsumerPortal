@@ -27,11 +27,8 @@ app.config(function ($routeProvider) {
 						templateUrl: 'app/mapview',
 						animation: 'second'
 							})
-							.when('/app/registersuccess',
-									{templateUrl: 'app/registersuccess',
-								animation: 'second'})
-								.when('/app/nonregistereduserpage',
-									{controller: 'MapViewController',
+							.when('/app/nonregistereduserpage',
+									{controller: 'NonRegisteredUserController',
 									templateUrl: 'app/nonregistereduserpage',
 								animation: 'second'})
 								.otherwise('/app/login');
@@ -63,7 +60,7 @@ app.run(function ($rootScope, $http, $location, $localStorage,$window) {
 			$http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
 		}
 
-		var publicPages = ['/app/login','/app/register','/app/registersuccess'];
+		var publicPages = ['/app/login','/app/register'];
 		var restrictedPage = publicPages.indexOf($location.path()) === -1;
 		if (restrictedPage && !$localStorage.currentUser) {
 			console.log("restricted page")

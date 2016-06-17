@@ -30,12 +30,6 @@ public class PageTemplateController {
 		return "pages/register";
 	}
 
-	@RequestMapping("/registersuccess")
-	public String registersuccess() {
-		System.out.println("Loading registersuccess page");
-		return "pages/registersuccess";
-	}
-
 	@RequestMapping("/mapview")
 	public String mapview() {
 		System.out.println("Loading mapview page");
