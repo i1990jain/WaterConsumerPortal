@@ -18,7 +18,7 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
     function login() {
 		
     AuthenticationService.Login($scope.username, $scope.password, function (result) {
-    	console.log(result);
+    	console.log(result.username);
     	if(result===true){
     	/*	if (result.response === 'MeteredUserFound') {
             	console.log("i got in");
@@ -32,14 +32,14 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
             	$location.path('/app/home');
            // }
                            
-        } else if(result===false) {
-        	console.log(result);  
+        } else {
+        	console.log(result.username);  
         	console.log('invalid user');
         	
-        	if(result==='Unauthorized'){
+        	if(result.response==='Unauthorized'){
         	$scope.error = 'Username or Password is incorrect';
         	}
-        	if(result==='NoHouseHoldId'){
+        	if(result.response==='NoHouseHoldId'){
         		$scope.error = $scope.username+' has no HouseholdId associated';
         	}
         	

@@ -312,7 +312,7 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			$http.post('nbhavg/', data)
 			.success(function (response) {
 				neighbourAvg=response.result;
-				neighbourAvg=neighbourAvg.toFixed(2);
+				//neighbourAvg=neighbourAvg.toFixed(2);
 				$scope.optionsDiv=true;	
 				$scope.toggleLoading();
 			});
