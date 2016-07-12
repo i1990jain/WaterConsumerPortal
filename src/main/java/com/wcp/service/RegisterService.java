@@ -123,47 +123,67 @@ public class RegisterService {
 						checked = 0;
 					}
 				} else {
-					int oid = 0;
-					String selectoid = "SELECT oid FROM User ORDER BY oid DESC";
-					System.out.println(selectoid);
-					Query selectoidquery = session.createQuery(selectoid);
-					selectoidquery.setMaxResults(1);
-					List result1 = selectoidquery.list();
+					// Check for smartmeterId
+					System.out.println("Check for smartMeterID");
+					String smartMeterCheck = "select smartMeterId from SmartMeter where (oid = (select smartMeter.oid from Household where oid=:householdOid))";
+					System.out.println(smartMeterCheck);
+					Query smartmetercheckquery = session.createQuery(smartMeterCheck);
+					smartmetercheckquery.setParameter("householdOid", householdid);
+					List result1 = smartmetercheckquery.list();
 					System.out.println(result1);
 					System.out.println("resultset:" + result1);
-					Iterator iterator2 = result1.iterator();
-					while (iterator2.hasNext()) {
-						oid = (Integer) iterator2.next();
+					Iterator iterator1 = result1.iterator();
+					while (iterator1.hasNext()) {
+						smartMeterId = (String) iterator1.next();
 					}
-					oid = oid + 1;
-					System.out.println(oid);
+					if (!smartMeterId.isEmpty()) {
+						map.put("responsemsg",
+								" Associated SmartMeterID Found.Please Uncheck the Checkbox to Register as a metered User");
+						map.put("response", "Unauthorized");
+					} else {
 
-					houseHold.setOid(registerdata.getHouseholdID());
-					user.setOid(oid);
-					user.setUsername(registerdata.getUserName());
-					user.setFirstName(registerdata.getFirstName());
-					user.setLastName(registerdata.getLastName());
-					user.setEmail(registerdata.getEmail());
-					user.setPassword(registerdata.getPassword());
+						int oid = 0;
+						String selectoid = "SELECT oid FROM User ORDER BY oid DESC";
+						System.out.println(selectoid);
+						Query selectoidquery = session.createQuery(selectoid);
+						selectoidquery.setMaxResults(1);
+						List result12 = selectoidquery.list();
+						System.out.println(result12);
+						System.out.println("resultset:" + result12);
+						Iterator iterator2 = result12.iterator();
+						while (iterator2.hasNext()) {
+							oid = (Integer) iterator2.next();
+						}
+						oid = oid + 1;
+						System.out.println(oid);
 
-					session.save(user);
-					// Update the NeutralUsertable
+						houseHold.setOid(registerdata.getHouseholdID());
+						user.setOid(oid);
+						user.setUsername(registerdata.getUserName());
+						user.setFirstName(registerdata.getFirstName());
+						user.setLastName(registerdata.getLastName());
+						user.setEmail(registerdata.getEmail());
+						user.setPassword(registerdata.getPassword());
 
-					neutraluser.setUser(user);
-					neutraluser.setHousehold(houseHold);
-					session.save(neutraluser);
-					// Update the consumer-segment
-					consumersegment.setOid(oid);
-					consumersegment.setName(registerdata.getFirstName());
-					consumersegment.setDescription("Non-MeteredUser");
-					session.save(consumersegment);
+						session.save(user);
+						// Update the NeutralUsertable
 
-					// Commit the transaction
-					session.getTransaction().commit();
+						neutraluser.setUser(user);
+						neutraluser.setHousehold(houseHold);
+						session.save(neutraluser);
+						// Update the consumer-segment
+						consumersegment.setOid(oid);
+						consumersegment.setName(registerdata.getFirstName());
+						consumersegment.setDescription("Non-MeteredUser");
+						session.save(consumersegment);
 
-					System.out.println("Insert completed");
-					// Insert(registerdata);
-					map.put("response", "Authorized");
+						// Commit the transaction
+						session.getTransaction().commit();
+
+						System.out.println("Insert completed");
+						// Insert(registerdata);
+						map.put("response", "Authorized");
+					}
 				}
 
 				if (checked == 1) {
