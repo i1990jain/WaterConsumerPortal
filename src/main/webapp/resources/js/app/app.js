@@ -15,6 +15,10 @@ app.config(function ($routeProvider) {
 				{controller: 'HomeController',
 			templateUrl: 'app/home',
 			animation: 'second'})
+			.when('/app/first',
+				{controller: 'FirstPageController',
+			templateUrl: 'app/first',
+			animation: 'second'})
 			.when('/app/histogram',
 					{controller: 'HistogramController',
 				templateUrl: 'app/histogram'})
@@ -27,9 +31,9 @@ app.config(function ($routeProvider) {
 						templateUrl: 'app/mapview',
 						animation: 'second'
 							})
-							.when('/app/nonregistereduserpage',
-									{controller: 'NonRegisteredUserController',
-									templateUrl: 'app/nonregistereduserpage',
+							.when('/app/adddata',
+									{controller: 'AddDataController',
+									templateUrl: 'app/adddata',
 								animation: 'second'})
 								.otherwise('/app/login');
 
@@ -53,10 +57,10 @@ app.run(function ($rootScope, $http, $location, $localStorage,$window) {
 				$location.path('/app/home');
 				
 			}
-			/*if($localStorage.currentUser.pagetoken=== "3"){
-				$location.path('/app/nonregistereduserpage');
+			if($localStorage.currentUser.pagetoken=== "3"){
+				$location.path('/app/adddata');
 				
-			}*/
+			}
 			$http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
 		}
 

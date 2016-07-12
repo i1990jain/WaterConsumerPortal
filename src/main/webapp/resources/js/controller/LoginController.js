@@ -20,17 +20,36 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
     AuthenticationService.Login($scope.username, $scope.password, function (result) {
     	console.log(result.username);
     	if(result===true){
-    	/*	if (result.response === 'MeteredUserFound') {
-            	console.log("i got in");
+    		if ($localStorage.currentUser.type === 'MeteredUserFound') {
+            	
            		console.log("meteredUser found");
             		$location.path('/app/home');	
            
-            }else if(result.response === 'Non-MeteredUserFound'){
+            }else if($localStorage.currentUser.type === 'Non-MeteredUserFound'){
             		console.log("Non-meteredUser found");
-            		$location.path('/app/home');
-            }else{*/
+            		
+            		var token=$localStorage.currentUser.token;
+            		var data = {
+            				oid : token
+            		};
+
+            		$http.post('userdata/', data)
+            		.success(function (response) {
+            			
+            			if(response.result.smartMeterId!=0){
+            				$location.path('/app/home');
+            			}else{
+            				$location.path('/app/first');
+            			}
+            			
+            			
+            		});
+            		
+                        
+            		
+            }else{
             	$location.path('/app/home');
-           // }
+            }
                            
         } else {
         	console.log(result.username);  
@@ -38,14 +57,16 @@ app.controller('LoginController', [ '$rootScope','$scope','$http','$location','A
         	
         	if(result.response==='Unauthorized'){
         	$scope.error = 'Username or Password is incorrect';
+        	$scope.message = true;
         	}
         	if(result.response==='NoHouseHoldId'){
         		$scope.error = $scope.username+' has no HouseholdId associated';
+        		$scope.message = true;
         	}
         	
         	$scope.username="";
         	$scope.password="";
-        	$scope.message = true;
+        	
         }
     });};
     function register() {

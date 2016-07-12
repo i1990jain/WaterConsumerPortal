@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.wcp.datamodel.MeterData;
 import com.wcp.model.User;
 import com.wcp.service.LoginService;
 
@@ -50,8 +51,7 @@ public class LoginController {
 
 			map.put("username", user.getUsername());
 			map.put("token", resultMap.get("userId"));
-			map.put("response",resultMap.get("response"));	
-			
+			map.put("type", resultMap.get("response"));
 
 			return new ResponseEntity<>(map, HttpStatus.OK);
 		} else if (!resultMap.get("userId").toString().equals("0")
@@ -67,5 +67,20 @@ public class LoginController {
 			return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
 
 		}
+	}
+
+	@RequestMapping(value = "/meterid", method = RequestMethod.POST)
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResponseEntity<Map<String, Object>> addmeterid(@RequestBody MeterData meterdata)
+			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
+		System.out.println(meterdata.getMeterid());
+		System.out.println(meterdata.getOid());
+		Map<String, Object> map = new HashMap<>();
+		Map<String, String> resultMap = new HashMap<>();
+
+		resultMap = loginService.addmeterid(meterdata);
+
+		return new ResponseEntity<>(map, HttpStatus.OK);
+
 	}
 }

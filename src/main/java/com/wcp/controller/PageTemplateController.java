@@ -18,6 +18,12 @@ public class PageTemplateController {
 		return "pages/home";
 	}
 
+	@RequestMapping("/first")
+	public String firstPage() {
+		System.out.println("loading firstPage");
+		return "pages/first";
+	}
+
 	@RequestMapping("/histogram")
 	public String loadHistogram() {
 		System.out.println("loading histogram");
@@ -35,9 +41,10 @@ public class PageTemplateController {
 		System.out.println("Loading mapview page");
 		return "pages/mapview";
 	}
-	@RequestMapping("/nonregistereduserpage")
-	public String nonregistereduserpage() {
-		System.out.println("Loading nonregistereduserpage page");
-		return "pages/nonregistereduserpage";
+
+	@RequestMapping("/adddata")
+	public String adddatapage() {
+		System.out.println("Loading adddata page");
+		return "pages/adddata";
 	}
 }

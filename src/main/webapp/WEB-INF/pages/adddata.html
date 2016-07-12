@@ -1,0 +1,50 @@
+<div ng-controller="AddDataController as adctrl">
+	<div id="wrapper">
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand"><a href="#"> Water Consumer
+						Portal </a></li>
+				<li>
+					<button ng-click="adctrl.logout()" class="btn btn-primary"
+						style="width: 90%">Logout</button>
+
+				</li>
+				<li><br></li>
+				<li>
+
+					<button ng-click="adctrl.loadHome()" class="btn btn-primary"
+						style="width: 90%">Home</button>
+				</li>
+				<li>
+					<button ng-click="adctrl.loadMapView()" class="btn btn-primary"
+						style="width: 90%">Map</button>
+
+				</li>
+
+			</ul>
+		</div>
+		<div id="page-content-wrapper">
+
+
+			<form ng-submit="adctrl.addReading()" name="dataForm">
+				<div class="loginmodal-container">
+
+					<h3 class="form-signin-heading" align="center">Add Reading</h3>
+
+					<div class="input-append date form_datetime">
+						<input placeholder="Date and Time" size="16" required="required"
+							ng-model="datetime" type="text"> <span class="add-on"><i
+							class="icon-th"></i></span>
+					</div>
+
+					<input required="required" type="number" ng-model="value"
+						placeholder="Value" step=any /> <input type="submit" name="add"
+						class="btn btn-primary btn-lg " value="Add">
+
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+</div>

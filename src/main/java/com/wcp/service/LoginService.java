@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.wcp.datamodel.MeterData;
+import com.wcp.model.Building;
+import com.wcp.model.Household;
+import com.wcp.model.SmartMeter;
 import com.wcp.model.User;
 
 @Service("loginService")
@@ -133,5 +137,104 @@ public class LoginService {
 			session.close();
 		}
 		return map;
+	}
+
+	public Map<String, String> addmeterid(MeterData meterdata)
+			throws MySQLIntegrityConstraintViolationException, SQLException, Exception {
+
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		Map<String, String> map = new HashMap<>();
+		Integer householdid = null;
+		Integer buildingid = null;
+		try {
+			session.beginTransaction();
+
+			String gethouseholdID = "select household.oid from NeutralUser where userOid=:userOid";
+
+			System.out.println(gethouseholdID);
+
+			Query householdquery = session.createQuery(gethouseholdID);
+
+			householdquery.setParameter("userOid", meterdata.getOid());
+
+			List result = householdquery.list();
+			System.out.println(result);
+			System.out.println("resultset:" + result);
+
+			Iterator iterator = result.iterator();
+			while (iterator.hasNext()) {
+				householdid = (int) iterator.next();
+
+			}
+
+			if (householdid != 0) {
+
+				String getbuildingID = "select building.oid from Household where oid=:oid";
+
+				System.out.println(getbuildingID);
+
+				Query getbuildingIDquery = session.createQuery(getbuildingID);
+
+				getbuildingIDquery.setParameter("oid", householdid);
+
+				List buildingresult = getbuildingIDquery.list();
+				System.out.println(buildingresult);
+				System.out.println("resultset:" + buildingresult);
+
+				Iterator buildingiterator = buildingresult.iterator();
+				while (buildingiterator.hasNext()) {
+					buildingid = (int) buildingiterator.next();
+
+				}
+
+				if (buildingid != 0) {
+					int oid = 0;
+					String selectoid = "SELECT oid FROM SmartMeter ORDER BY oid DESC";
+					System.out.println(selectoid);
+					Query selectoidquery = session.createQuery(selectoid);
+					selectoidquery.setMaxResults(1);
+					List result12 = selectoidquery.list();
+					System.out.println(result12);
+					System.out.println("resultset:" + result12);
+					Iterator iterator2 = result12.iterator();
+					while (iterator2.hasNext()) {
+						oid = (Integer) iterator2.next();
+					}
+					oid = oid + 1;
+					System.out.println(oid);
+
+					SmartMeter obj = new SmartMeter();
+					Building building = new Building();
+					building.setOid(buildingid);
+					obj.setBuilding(building);
+					obj.setOid(oid);
+					obj.setSmartMeterId(meterdata.getMeterid());
+
+					session.save(obj);
+
+					Household household = new Household();
+					household.setBuilding(building);
+					household.setSmartMeter(obj);
+					household.setOid(householdid);
+
+					session.update(household);
+
+					session.getTransaction().commit();
+				}
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			session.close();
+		}
+
+		return map;
+
 	}
 }

@@ -18,6 +18,8 @@
 					<button ng-click="hmctrl.loadMapView()" class="btn btn-primary"
 						style="width: 90%">Map</button>
 				</li>
+				
+				
 
 			</ul>
 		</div>
@@ -61,6 +63,10 @@
 										<li class="twPc-ArrangeSizeFit"><span
 										class="twPc-StatLabel twPc-block">Country</span> <span
 										class="twPc-StatValue">{{country}}</span></li>
+										
+										<li class="twPc-ArrangeSizeFit" ng-show="nonmeterduser"><span
+										class="twPc-StatLabel twPc-block">Add Reading</span> <span
+										class="twPc-StatValue"><button id="add" class="btn btn-sm btn-primary" ng-click="hmctrl.addData()">Add</button></span></li>
 										
 								</ul>
 							</div>

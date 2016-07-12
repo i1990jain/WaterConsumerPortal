@@ -5,7 +5,7 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 
 	user.logout = logout;
 	user.loadMapView=loadMapView;
-
+	user.addData=addData;
 	$rootScope.$on('$routeChangeStart', function(event, currRoute, prevRoute){
 		$rootScope.animation = currRoute.animation;
 	});
@@ -22,6 +22,12 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 		$localStorage.currentUser.pagetoken="2";
 
 		$location.path('/app/mapview');
+	}
+	
+	function addData() {
+		$localStorage.currentUser.pagetoken="3";
+
+		$location.path('/app/adddata');
 	}
 
 
@@ -42,6 +48,7 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 		.success(function (response) {
 			$scope.houseHoldId=response.result.houseHoldId;
 			$scope.smartMeterId=response.result.smartMeterId;
+			$localStorage.currentUser.smartmeterid=$scope.smartMeterId;
 			$scope.buildingId=response.result.buildingId;
 			$scope.consumptionType=response.result.consumptionType;
 			if($scope.consumptionType==="individual"){
@@ -54,14 +61,14 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 				$scope.common = true;
 			}
 			
-			if(response.result.zipcode===''){
+			if(response.result.zipcode===null){
 				$scope.zipcode="-";
 			}else{
 				$scope.zipcode=response.result.zipcode;
 				
 			}
 			
-			if(response.result.country===''){
+			if(response.result.country===null){
 				$scope.country="-";
 			}else{
 				$scope.country=response.result.country;
@@ -70,6 +77,10 @@ app.controller('HomeController', [ '$rootScope','$scope','$http','$location','Au
 			$localStorage.currentUser.country=response.result.country;
 			$localStorage.currentUser.zipcode=response.result.zipcode;
 			
+			if($localStorage.currentUser.type==="Non-MeteredUserFound"){
+				
+				$scope.nonmeterduser=true;
+			}
 		});
 	});
 

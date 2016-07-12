@@ -5,17 +5,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.wcp.datamodel.ReadingData;
 import com.wcp.model.MeterReading;
+import com.wcp.model.SmartMeter;
 
 @Service("databaseService")
 @Transactional
@@ -190,6 +195,54 @@ public class DatabaseService {
 		}
 
 		return readingDataList;
+	}
+
+	public Map<String, String> addReading(Integer smartmeteroid, DateTime dt, Double double1) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		Map<String, String> map = new HashMap<>();
+
+		try {
+			session.beginTransaction();
+
+			int oid = 0;
+			String selectoid = "SELECT oid FROM MeterReading ORDER BY oid DESC";
+			System.out.println(selectoid);
+			Query selectoidquery = session.createQuery(selectoid);
+			selectoidquery.setMaxResults(1);
+			List result12 = selectoidquery.list();
+			System.out.println(result12);
+			System.out.println("resultset:" + result12);
+			Iterator iterator2 = result12.iterator();
+			while (iterator2.hasNext()) {
+				oid = (Integer) iterator2.next();
+			}
+			oid = oid + 1;
+			System.out.println(oid);
+
+			MeterReading meterReading = new MeterReading();
+			meterReading.setOid(oid);
+			SmartMeter smartMeter = new SmartMeter();
+			smartMeter.setOid(smartmeteroid);
+			meterReading.setSmartMeter(smartMeter);
+			meterReading.setReadingDateTime(dt.toDate());
+			meterReading.setCompany("SES");
+			meterReading.setTotalConsumption(BigDecimal.valueOf(double1));
+			meterReading.setTotalConsumptionAdjusted(BigDecimal.valueOf(double1));
+
+			session.save(meterReading);
+			session.save(smartMeter);
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			session.close();
+		}
+		return map;
 	}
 
 }
