@@ -184,7 +184,8 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 		$http.post('histogram/', data)
 		.success(function (response) {
 			var array=response.result;
-
+			console.log(array);
+			if(array.length>0){
 
 			for (var i in array) {
 				var reading=[array[i].readingDateTime,array[i].totalConsumptionAdjusted]
@@ -312,11 +313,28 @@ app.controller('HistogramController', [ '$scope','$http','$location','$document'
 			$http.post('nbhavg/', data)
 			.success(function (response) {
 				neighbourAvg=response.result;
-				//neighbourAvg=neighbourAvg.toFixed(2);
+				console.log(neighbourAvg);
+				if(!isNaN(neighbourAvg)){
+				neighbourAvg=neighbourAvg.toFixed(2);
+				}
 				$scope.optionsDiv=true;	
 				$scope.toggleLoading();
 			});
-			
+		}else{
+			$scope.toggleLoading();
+			var tmpl = 'Please add Data using the add button<br>';
+			$mdDialog.show(
+					$mdDialog.alert()
+					.parent(angular.element(document.querySelector('#popupContainer')))
+					.clickOutsideToClose(true)
+					.title('No Consumption Data Available')
+					.ariaLabel('Alert Dialog')
+					.ok('Ok')
+					.htmlContent(tmpl)
+					.hasBackdrop(false));
+			$scope.chartConfig.options.title='No Household Data Available';
+				
+		}
 			
 		});
 
